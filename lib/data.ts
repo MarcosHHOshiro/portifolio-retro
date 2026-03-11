@@ -1,0 +1,100 @@
+export interface Project {
+  slug: string
+  title: string
+  description: string
+  longDescription: string
+  problem: string
+  solution: string
+  architecture: string
+  stack: string[]
+  category: string
+  status?: "under-construction"
+  image?: string
+  github?: string
+  demo?: string
+}
+
+export const projects: Project[] = [
+  {
+    slug: "food-ordering-app",
+    title: "Food Ordering App",
+    description: "Full-stack food ordering platform where customers search restaurants by city and cuisine, place orders, and track order status; restaurant owners manage menus and incoming orders.",
+    longDescription: "A production-focused food ordering application with protected routes, media upload for restaurant images, Stripe Checkout integration, and reliable order lifecycle management. Customers can search restaurants, add items to cart, checkout via Stripe, and track order status. Restaurant owners can create and manage restaurants and menus, and view incoming orders.",
+    problem: "Keeping order status accurate when payment confirmation is asynchronous (Stripe webhooks) is challenging. The platform also requires secure authentication, authenticated API routes, reliable media uploads, and robust order creation logic.",
+    solution: "Built a full-stack solution: Auth0 for authentication and protected routes, an Express API split by domains (user, restaurant, order), MongoDB/Mongoose persistence, Cloudinary for image upload, Stripe Checkout + webhook handling to transition orders from 'pending_payment' to 'paid', and a React frontend using React Query for server state.",
+    architecture: "Two-app architecture: a React + Vite frontend handling auth flows, search, checkout triggers and order tracking; and a Node.js + Express backend validating tokens, enforcing business rules, persisting data in MongoDB, and processing Stripe webhooks. Backend is organized into routes, controllers, middleware (JWT validation, payload validation), and Mongoose models. Order flow: create checkout session -> create order with status 'pending_payment' -> Stripe Checkout -> webhook confirms payment -> backend updates order to 'paid'.",
+    stack: ["React", "Vite", "TypeScript", "Node.js", "Express", "MongoDB", "Mongoose", "Auth0", "Stripe", "Cloudinary", "Multer", "React Query"],
+    category: "Full Stack",
+    image: "/Foodly.png",
+    github: "https://github.com/MarcosHHOshiro/Food-ordering-app",
+    demo: "https://food-ordering-app-frontend-gogz.onrender.com/",
+  },
+  {
+    slug: "gym-pass-style-app-node",
+    title: "Gym Pass",
+    description:
+      "RESTful API for managing gym check-ins, inspired by the GymPass business model. Built with Node.js, TypeScript, Fastify and Prisma ORM.",
+    longDescription:
+      "Backend API focused on gym check-ins, with user registration/authentication, gym search by name or proximity, and check-in flows with strict business rules. It includes RBAC for admin actions, JWT authentication with refresh token via cookie, Swagger/OpenAPI documentation, and unit/e2e test coverage.",
+    problem:
+      "Managing gym check-ins requires enforcing rules like maximum distance, one check-in per day, limited validation window, and role-based permissions, while keeping the API secure and maintainable.",
+    solution:
+      "Implemented a layered architecture with Fastify controllers, use cases, and repository abstractions using Prisma + PostgreSQL. Added JWT/refresh-token authentication, RBAC middleware, geolocation-based validation, and automated testing with Vitest.",
+    architecture:
+      "Fastify exposes REST routes and handles request/response validation with Zod. Controllers delegate to use-case services that encapsulate business rules. Use cases access data through repository interfaces, with Prisma implementations for PostgreSQL and in-memory implementations for tests. Swagger/OpenAPI provides interactive API documentation.",
+    stack: [
+      "Node.js",
+      "TypeScript",
+      "Fastify",
+      "Prisma ORM",
+      "PostgreSQL",
+      "JWT",
+      "Zod",
+      "Vitest",
+      "Docker"
+    ],
+    category: "Backend",
+    image: "/gym.png",
+    github: "https://github.com/MarcosHHOshiro/Gym-pass-style-app-node",
+    demo: "https://gym.marcos-hh-oshiro.com/docs",
+  },
+  {
+    slug: "biolinks",
+    title: "BioLinks",
+    description: "Link-in-bio platform where users create a public profile page with customizable links.",
+    longDescription: "BioLinks is a web application that lets users register, configure a unique handler, upload a profile photo, manage social/content links, reorder them, and publish everything on a public page. It includes authentication, profile management, link CRUD, ordering controls, and public profile rendering by handler.",
+    problem: "Users needed a simple way to centralize multiple links in one public URL and manage them easily without editing code.",
+    solution: "Built a full Laravel application with auth, profile editing, handler validation, link creation/editing/deletion, drag-like ordering controls (up/down), and a public page at /{handler} to share all links.",
+    architecture: "Laravel monolith (MVC): Blade views for UI, controllers/requests/rules for business logic and validation, Eloquent models for persistence, SQLite for local storage, and Vite + TailwindCSS for frontend assets.",
+    stack: ["Laravel 12", "PHP 8.2", "SQLite", "Blade", "Tailwind CSS", "DaisyUI", "Vite"],
+    category: "Full Stack",
+    image: "/biolinks.png",
+    github: "https://github.com/MarcosHHOshiro/Biolinks",
+    demo: "https://biolinks.marcos-hh-oshiro.com/login",
+  },
+  {
+    slug: "auth-service",
+    title: "Authentication Microservice",
+    description: "Secure authentication service with OAuth2, MFA support, and session management for distributed systems.",
+    longDescription: "A standalone authentication microservice providing secure user authentication, authorization, and session management. Supports multiple authentication strategies including OAuth2, SAML, and custom username/password flows.",
+    problem: "Each service in the system was implementing its own authentication, leading to inconsistent security practices and duplicated code across the organization.",
+    solution: "Created a centralized authentication service with support for multiple identity providers, multi-factor authentication, and a standardized JWT-based session management system.",
+    architecture: "Built with Python/FastAPI for its async capabilities. Uses PostgreSQL for user data, Redis for session storage, and implements TOTP for 2FA. Exposes both REST and gRPC interfaces for flexibility.",
+    stack: ["Python", "FastAPI", "PostgreSQL", "Redis", "gRPC", "Docker"],
+    category: "Security",
+    image: "/loading.png",
+    status: "under-construction",
+  }
+]
+
+export const personalInfo = {
+  name: "Marcos H. H. Oshiro",
+  title: "Backend Developer",
+  subtitle: "Software Engineer",
+  email: "marcos.2h.oshiro@gmail.com",
+  github: "https://github.com/MarcosHHOshiro",
+  linkedin: "https://www.linkedin.com/in/marcos2hoshiro/",
+  bio: "I'm a Backend Developer focused on building scalable and reliable systems. I have experience designing RESTful APIs, DDD, clean architectures, and working with databases like PostgreSQL. My main stack includes Node.js, PHP, and modern backend tools such as Docker, Prisma, and NestJS. I'm passionate about system design, performance optimization, and building software that solves real business problems. Currently I'm expanding my knowledge in automation practices and learning Python.",
+  education: "Bachelor in Software Engineering",
+  location: "Dourados, Mato Grosso do Sul, Brazil",
+}
