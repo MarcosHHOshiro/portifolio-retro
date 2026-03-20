@@ -1,3 +1,5 @@
+export type ProjectType = "fullstack" | "backend" | "frontend"
+
 export interface Project {
   slug: string
   title: string
@@ -7,11 +9,18 @@ export interface Project {
   solution: string
   architecture: string
   stack: string[]
+  type: ProjectType
   category: string
   status?: "under-construction"
   image?: string
   github?: string
   demo?: string
+}
+
+export const projectTypeLabel: Record<ProjectType, string> = {
+  fullstack: "Fullstack",
+  backend: "Backend",
+  frontend: "Frontend",
 }
 
 export const projects: Project[] = [
@@ -24,6 +33,7 @@ export const projects: Project[] = [
     solution: "Built a full-stack solution: Auth0 for authentication and protected routes, an Express API split by domains (user, restaurant, order), MongoDB/Mongoose persistence, Cloudinary for image upload, Stripe Checkout + webhook handling to transition orders from 'pending_payment' to 'paid', and a React frontend using React Query for server state.",
     architecture: "Two-app architecture: a React + Vite frontend handling auth flows, search, checkout triggers and order tracking; and a Node.js + Express backend validating tokens, enforcing business rules, persisting data in MongoDB, and processing Stripe webhooks. Backend is organized into routes, controllers, middleware (JWT validation, payload validation), and Mongoose models. Order flow: create checkout session -> create order with status 'pending_payment' -> Stripe Checkout -> webhook confirms payment -> backend updates order to 'paid'.",
     stack: ["React", "Vite", "TypeScript", "Node.js", "Express", "MongoDB", "Mongoose", "Auth0", "Stripe", "Cloudinary", "Multer", "React Query"],
+    type: "fullstack",
     category: "Full Stack",
     image: "/Foodly.png",
     github: "https://github.com/MarcosHHOshiro/Food-ordering-app",
@@ -53,6 +63,7 @@ export const projects: Project[] = [
       "Vitest",
       "Docker"
     ],
+    type: "backend",
     category: "Backend",
     image: "/gym.png",
     github: "https://github.com/MarcosHHOshiro/Gym-pass-style-app-node",
@@ -67,6 +78,7 @@ export const projects: Project[] = [
     solution: "Built a full Laravel application with auth, profile editing, handler validation, link creation/editing/deletion, drag-like ordering controls (up/down), and a public page at /{handler} to share all links.",
     architecture: "Laravel monolith (MVC): Blade views for UI, controllers/requests/rules for business logic and validation, Eloquent models for persistence, SQLite for local storage, and Vite + TailwindCSS for frontend assets.",
     stack: ["Laravel 12", "PHP 8.2", "SQLite", "Blade", "Tailwind CSS", "DaisyUI", "Vite"],
+    type: "fullstack",
     category: "Full Stack",
     image: "/biolinks.png",
     github: "https://github.com/MarcosHHOshiro/Biolinks",
@@ -81,6 +93,7 @@ export const projects: Project[] = [
     solution: "Created a centralized authentication service with support for multiple identity providers, multi-factor authentication, and a standardized JWT-based session management system.",
     architecture: "Built with Python/FastAPI for its async capabilities. Uses PostgreSQL for user data, Redis for session storage, and implements TOTP for 2FA. Exposes both REST and gRPC interfaces for flexibility.",
     stack: ["Python", "FastAPI", "PostgreSQL", "Redis", "gRPC", "Docker"],
+    type: "backend",
     category: "Security",
     image: "/loading.png",
     status: "under-construction",

@@ -2,8 +2,14 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Window } from "@/components/window"
 import { Footer } from "@/components/footer"
-import { projects } from "@/lib/data"
+import { projectTypeLabel, projects } from "@/lib/data"
 import type { Metadata } from "next"
+
+const projectTypeClasses = {
+  fullstack: "bg-primary text-primary-foreground border-primary",
+  backend: "bg-card text-foreground border-border",
+  frontend: "bg-secondary text-foreground border-border",
+} as const
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>
@@ -53,6 +59,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <Window title={`${project.slug}.readme`}>
             <div className="space-y-6">
               <div className="flex flex-wrap items-center gap-2">
+                <span
+                  className={`border px-2 py-0.5 font-mono text-xs uppercase ${projectTypeClasses[project.type]}`}
+                >
+                  {projectTypeLabel[project.type]}
+                </span>
                 <span className="border border-border px-2 py-0.5 font-mono text-xs uppercase">
                   {project.category}
                 </span>

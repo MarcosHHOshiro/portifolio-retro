@@ -2,8 +2,14 @@ import Link from "next/link"
 import Image from "next/image"
 import { Window } from "@/components/window"
 import { Footer } from "@/components/footer"
-import { projects } from "@/lib/data"
+import { projectTypeLabel, projects } from "@/lib/data"
 import type { Metadata } from "next"
+
+const projectTypeClasses = {
+  fullstack: "bg-primary text-primary-foreground border-primary",
+  backend: "bg-card text-foreground border-border",
+  frontend: "bg-secondary text-foreground border-border",
+} as const
 
 export const metadata: Metadata = {
   title: "Projects | Fullstack Developer Portfolio",
@@ -60,6 +66,13 @@ export default function ProjectsPage() {
                       )}
                     </div>
                     <div>
+                      <div className="mb-2 flex flex-wrap items-center gap-2">
+                        <span
+                          className={`inline-block border px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide ${projectTypeClasses[project.type]}`}
+                        >
+                          {projectTypeLabel[project.type]}
+                        </span>
+                      </div>
                       <h2 className="font-bold text-xl tracking-tight">{project.title}</h2>
                       {project.status === "under-construction" && (
                         <p className="mt-2 inline-block border border-border px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide text-muted-foreground">

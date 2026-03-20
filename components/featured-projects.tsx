@@ -1,7 +1,13 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Window } from "./window"
-import { projects } from "@/lib/data"
+import { projectTypeLabel, projects } from "@/lib/data"
+
+const projectTypeClasses = {
+  fullstack: "bg-primary text-primary-foreground border-primary",
+  backend: "bg-card text-foreground border-border",
+  frontend: "bg-secondary text-foreground border-border",
+} as const
 
 export function FeaturedProjects() {
   const featuredProjects = projects.slice(0, 4)
@@ -45,6 +51,13 @@ export function FeaturedProjects() {
                     )}
                   </div>
                   <div>
+                    <div className="mb-2 flex flex-wrap items-center gap-2">
+                      <span
+                        className={`inline-block border px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide ${projectTypeClasses[project.type]}`}
+                      >
+                        {projectTypeLabel[project.type]}
+                      </span>
+                    </div>
                     <h3 className="font-bold text-xl tracking-tight">{project.title}</h3>
                     {project.status === "under-construction" && (
                       <p className="mt-2 inline-block border border-border px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide text-muted-foreground">
