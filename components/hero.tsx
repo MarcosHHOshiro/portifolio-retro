@@ -16,15 +16,15 @@ export function Hero() {
             </div>
             
             <div className="flex flex-wrap items-center gap-2 font-mono text-sm uppercase tracking-wider">
-              <span className="border-2 border-border px-2 py-1">Backend Developer</span>
+              <span className="border-2 border-border px-2 py-1">Fullstack Developer</span>
               <span className="text-muted-foreground">/</span>
               <span className="border-2 border-border px-2 py-1">Software Engineer</span>
             </div>
             
             <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              Building robust and scalable backend systems. Specialized in designing 
-              RESTful APIs, DDD, and database optimization. 
-              Software Engineering graduate passionate about clean code and system design.
+              Building robust and scalable fullstack systems from frontend to backend.
+              Specialized in React/Next.js, RESTful APIs, clean architecture, and database optimization.
+              Software Engineering graduate currently applying NestJS in backend services.
             </p>
             
             <div className="flex flex-wrap gap-3 pt-4">

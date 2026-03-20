@@ -6,8 +6,8 @@ import { projects } from "@/lib/data"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Projects | Backend Developer Portfolio",
-  description: "Explore my backend development projects including APIs, microservices, and system architecture.",
+  title: "Projects | Fullstack Developer Portfolio",
+  description: "Explore my fullstack projects, APIs, and system architecture case studies.",
 }
 
 export default function ProjectsPage() {
@@ -25,7 +25,7 @@ export default function ProjectsPage() {
                 All Projects
               </h1>
               <p className="text-muted-foreground">
-                A collection of backend systems, APIs, and infrastructure projects.
+                A collection of fullstack applications, APIs, and infrastructure projects.
               </p>
             </div>
           </Window>

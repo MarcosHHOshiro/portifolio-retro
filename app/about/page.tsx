@@ -5,8 +5,8 @@ import { personalInfo } from "@/lib/data"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "About | Backend Developer Portfolio",
-  description: "Learn about my background in software engineering and backend development.",
+  title: "About | Fullstack Developer Portfolio",
+  description: "Learn about my background in software engineering and fullstack development.",
 }
 
 const experience = [
@@ -18,7 +18,7 @@ const experience = [
     workModel: "On-site",
     location: "Dourados, Mato Grosso do Sul, Brazil",
     description:
-      "Developing and evolving web and backend systems, with focus on PostgreSQL, GitHub workflows, and continuous improvements in quality, integration, and reliability.",
+      "Developing and evolving fullstack web systems, with focus on PostgreSQL, GitHub workflows, frontend/backend integration, and continuous quality improvements.",
   },
   {
     period: "Aug 2023 - Feb 2025",
@@ -38,18 +38,18 @@ const experience = [
     workModel: "On-site",
     location: "Dourados, Mato Grosso do Sul, Brazil",
     description:
-      "Contributed to REST API development, supported backend implementation, and helped maintain internal system features.",
+      "Contributed to REST API development, supported fullstack implementation, and helped maintain internal system features.",
   },
 ]
 
 const interests = [
   {
     title: "System Design",
-    description: "Designing scalable backend architectures and microservices.",
+    description: "Designing scalable architectures for fullstack systems and services.",
   },
   {
-    title: "Backend Engineering",
-    description: "Building APIs and robust backend systems.",
+    title: "Fullstack Engineering",
+    description: "Building complete products with modern frontends and robust APIs.",
   },
   {
     title: "Automations",
@@ -99,7 +99,7 @@ export default function AboutPage() {
               <div className="border-l-2 border-border pl-4">
                 <p className="font-bold">{personalInfo.education}</p>
                 <p className="text-sm text-muted-foreground">
-                  Focused on software architecture, backend development, algorithms, and distributed systems.
+                  Focused on software architecture, fullstack development, algorithms, and distributed systems.
                 </p>
               </div>
             </div>

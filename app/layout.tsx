@@ -19,8 +19,8 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  title: 'Backend Developer | Software Engineer',
-  description: 'Portfolio of a Backend Developer specialized in APIs, system architecture, and databases. Software Engineering graduate with expertise in building scalable backend solutions.',
+  title: 'Fullstack Developer | Software Engineer',
+  description: 'Portfolio of a Fullstack Developer specialized in frontend applications, APIs, system architecture, and databases.',
   generator: 'v0.app',
   icons: {
     icon: '/letra-m.svg',

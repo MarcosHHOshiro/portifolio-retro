@@ -89,12 +89,12 @@ export const projects: Project[] = [
 
 export const personalInfo = {
   name: "Marcos H. H. Oshiro",
-  title: "Backend Developer",
+  title: "Fullstack Developer",
   subtitle: "Software Engineer",
   email: "marcos.2h.oshiro@gmail.com",
   github: "https://github.com/MarcosHHOshiro",
   linkedin: "https://www.linkedin.com/in/marcos2hoshiro/",
-  bio: "I'm a Backend Developer focused on building scalable and reliable systems. I have experience designing RESTful APIs, DDD, clean architectures, and working with databases like PostgreSQL. My main stack includes Node.js, PHP, and modern backend tools such as Docker, Prisma, and NestJS. I'm passionate about system design, performance optimization, and building software that solves real business problems. Currently I'm expanding my knowledge in automation practices and learning Python.",
+  bio: "I'm a Fullstack Developer focused on building scalable and reliable web systems from end to end. I have experience designing RESTful APIs, applying clean architectures, working with databases like PostgreSQL, and building modern interfaces with React and Next.js. My main stack includes Node.js, TypeScript, PHP, and Docker. Recently, I learned NestJS and started applying it to build more modular and maintainable backend services. I'm passionate about system design, performance optimization, and building software that solves real business problems.",
   education: "Bachelor in Software Engineering",
   location: "Dourados, Mato Grosso do Sul, Brazil",
 }

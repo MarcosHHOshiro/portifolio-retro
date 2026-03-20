@@ -2,8 +2,8 @@ import { Window } from "./window"
 
 const skillCategories = [
   {
-    title: "Backend",
-    skills: ["Node.js", "Python", "PHP", "REST APIs", "GraphQL"],
+    title: "Backend & APIs",
+    skills: ["Node.js", "NestJS", "Python", "PHP", "REST APIs", "GraphQL"],
   },
   {
     title: "Databases",

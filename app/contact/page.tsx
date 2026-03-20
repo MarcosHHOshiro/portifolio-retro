@@ -5,7 +5,7 @@ import { personalInfo } from "@/lib/data"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Contact | Backend Developer Portfolio",
+  title: "Contact | Fullstack Developer Portfolio",
   description: "Get in touch for collaboration opportunities or just to say hello.",
 }
 
@@ -55,7 +55,7 @@ export default function ContactPage() {
               </h1>
               
               <p className="text-lg leading-relaxed text-muted-foreground">
-                {"I am always open to discussing backend projects, freelance opportunities, and collaboration. Feel free to reach out through any of the channels below."}
+                {"I am always open to discussing fullstack projects, backend/API architecture, freelance opportunities, and collaboration. Feel free to reach out through any of the channels below."}
               </p>
             </div>
           </Window>
