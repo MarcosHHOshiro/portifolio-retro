@@ -1,7 +1,63 @@
+"use client"
+
 import Link from "next/link"
+import { useEffect, useState } from "react"
 import { Window } from "./window"
 
+const introText = "Hello. I'm Marcos"
+const nameStartIndex = "Hello. I'm ".length
+
 export function Hero() {
+  const [displayedText, setDisplayedText] = useState("")
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches)
+
+    updatePreference()
+
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", updatePreference)
+      return () => mediaQuery.removeEventListener("change", updatePreference)
+    }
+
+    mediaQuery.addListener(updatePreference)
+    return () => mediaQuery.removeListener(updatePreference)
+  }, [])
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      setDisplayedText(introText)
+      return
+    }
+
+    setDisplayedText("")
+
+    let currentIndex = 0
+    let typingInterval: number | undefined
+    const typingDelay = window.setTimeout(() => {
+      typingInterval = window.setInterval(() => {
+        currentIndex += 1
+        setDisplayedText(introText.slice(0, currentIndex))
+
+        if (currentIndex >= introText.length) {
+          window.clearInterval(typingInterval)
+        }
+      }, 75)
+    }, 250)
+
+    return () => {
+      window.clearTimeout(typingDelay)
+      if (typingInterval) {
+        window.clearInterval(typingInterval)
+      }
+    }
+  }, [prefersReducedMotion])
+
+  const typedIntro = displayedText.slice(0, nameStartIndex)
+  const typedName = displayedText.slice(nameStartIndex)
+
   return (
     <section className="px-4 pt-20 pb-12 md:pt-24 md:pb-16">
       <div className="mx-auto max-w-5xl">
@@ -9,9 +65,17 @@ export function Hero() {
           <div className="space-y-6">
             <div className="space-y-2">
               <p className="font-mono text-sm text-muted-foreground">{"// Hello, World!"}</p>
-              <h1 className="text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
-                {"Hello. I'm "}
-                <span className="border-b-4 border-foreground">Marcos</span>
+              <h1
+                aria-label={introText}
+                className="text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl"
+              >
+                <span aria-hidden="true">{typedIntro}</span>
+                {typedName ? (
+                  <span aria-hidden="true" className="border-b-4 border-foreground">
+                    {typedName}
+                  </span>
+                ) : null}
+                <span aria-hidden="true" className="hero-caret" />
               </h1>
             </div>
             
