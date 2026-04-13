@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import { Header } from '@/components/header'
 import { ThemeProvider } from '@/components/theme-provider'
+import { FloatingTerminal } from '@/components/floating-terminal'
 
 const spaceMono = Space_Mono({ 
   subsets: ["latin"],
@@ -51,6 +52,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
+          <FloatingTerminal />
           <main>
             {children}
           </main>
