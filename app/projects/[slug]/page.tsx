@@ -48,7 +48,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   return (
     <>
       <section className="px-4 pt-20 pb-8 md:pt-24">
-        <div className="mx-auto max-w-4xl">
+        <div className="w-full">
           <Link
             href="/projects"
             className="mb-6 inline-flex items-center gap-2 font-mono text-sm uppercase tracking-wide hover:underline"
@@ -120,7 +120,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       </section>
 
       <section className="px-4 py-8">
-        <div className="mx-auto max-w-4xl space-y-6">
+        <div className="w-full space-y-6">
           <Window title="problem.txt">
             <div className="space-y-3">
               <h2 className="font-mono text-sm font-bold uppercase tracking-wider text-muted-foreground">
@@ -169,7 +169,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       </section>
 
       <section className="px-4 py-8">
-        <div className="mx-auto max-w-4xl">
+        <div className="w-full">
           <div className="border-t-2 border-dashed border-border pt-8">
             <div className="flex items-center justify-between">
               <span className="font-mono text-sm text-muted-foreground">

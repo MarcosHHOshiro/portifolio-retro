@@ -69,7 +69,7 @@ export default function AboutPage() {
   return (
     <>
       <section className="px-4 pt-20 pb-8 md:pt-24">
-        <div className="mx-auto max-w-4xl">
+        <div className="w-full">
           <Window title="about.me">
             <div className="space-y-6">
               <div className="flex items-center gap-2">
@@ -90,7 +90,7 @@ export default function AboutPage() {
       </section>
 
       <section className="px-4 py-8">
-        <div className="mx-auto max-w-4xl space-y-6">
+        <div className="w-full space-y-6">
           <Window title="education.txt">
             <div className="space-y-4">
               <h2 className="font-mono text-sm font-bold uppercase tracking-wider text-muted-foreground">
@@ -151,7 +151,7 @@ export default function AboutPage() {
       </section>
 
       <section className="px-4 py-8">
-        <div className="mx-auto max-w-4xl">
+        <div className="w-full">
           <div className="border-2 border-border bg-secondary p-6 text-center">
             <p className="font-mono text-lg">
               {"Interested in working together?"}

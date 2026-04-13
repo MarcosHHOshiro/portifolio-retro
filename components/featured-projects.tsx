@@ -1,26 +1,29 @@
 import Link from "next/link"
-import Image from "next/image"
-import { Window } from "./window"
-import { projectTypeLabel, projects } from "@/lib/data"
-
-const projectTypeClasses = {
-  fullstack: "bg-primary text-primary-foreground border-primary",
-  backend: "bg-card text-foreground border-border",
-  frontend: "bg-secondary text-foreground border-border",
-} as const
+import { ProjectCard } from "./project-card"
+import { projects } from "@/lib/data"
 
 export function FeaturedProjects() {
   const featuredProjects = projects.slice(0, 4)
 
   return (
-    <section className="px-4 py-12">
-      <div className="mx-auto max-w-5xl">
-        <div className="mb-8 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-              Selected Work
-            </span>
-            <div className="h-px w-24 bg-border" />
+    <section className="px-4 py-10">
+      <div className="w-full">
+        <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div className="space-y-2">
+            <div className="flex items-center gap-4">
+              <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                Selected Work
+              </span>
+              <div className="h-px w-24 bg-border" />
+            </div>
+            <div className="max-w-2xl">
+              <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+                Selected projects
+              </h2>
+              <p className="mt-2 text-muted-foreground">
+                A few projects that represent how I build interfaces, APIs, and fullstack systems.
+              </p>
+            </div>
           </div>
           <Link
             href="/projects"
@@ -30,57 +33,9 @@ export function FeaturedProjects() {
           </Link>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {featuredProjects.map((project) => (
-            <Link key={project.slug} href={`/projects/${project.slug}`} className="group">
-              <Window title={`${project.slug}.exe`} className="h-full transition-all group-hover:translate-x-1 group-hover:translate-y-1">
-                <div className="space-y-4">
-                  <div className="aspect-video border-2 border-dashed border-border bg-secondary flex items-center justify-center">
-                    {project.image ? (
-                      <Image
-                        src={project.image}
-                        alt={`${project.title} preview`}
-                        width={640}
-                        height={360}
-                        className="h-full w-full object-cover"
-                      />
-                    ) : (
-                      <span className="font-mono text-xs uppercase text-muted-foreground">
-                        [{project.category}]
-                      </span>
-                    )}
-                  </div>
-                  <div>
-                    <div className="mb-2 flex flex-wrap items-center gap-2">
-                      <span
-                        className={`inline-block border px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide ${projectTypeClasses[project.type]}`}
-                      >
-                        {projectTypeLabel[project.type]}
-                      </span>
-                    </div>
-                    <h3 className="font-bold text-xl tracking-tight">{project.title}</h3>
-                    {project.status === "under-construction" && (
-                      <p className="mt-2 inline-block border border-border px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide text-muted-foreground">
-                        Under Construction
-                      </p>
-                    )}
-                    <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
-                      {project.description}
-                    </p>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {project.stack.slice(0, 3).map((tech) => (
-                      <span
-                        key={tech}
-                        className="border border-border px-2 py-0.5 font-mono text-xs uppercase"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </Window>
-            </Link>
+            <ProjectCard key={project.slug} project={project} titleAs="h3" techCount={3} />
           ))}
         </div>
       </div>

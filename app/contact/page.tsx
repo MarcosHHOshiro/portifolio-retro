@@ -42,7 +42,7 @@ export default function ContactPage() {
   return (
     <>
       <section className="px-4 pt-20 pb-8 md:pt-24">
-        <div className="mx-auto max-w-4xl">
+        <div className="w-full">
           <Window title="contact.sh">
             <div className="space-y-6">
               <div className="flex items-center gap-2">
@@ -63,7 +63,7 @@ export default function ContactPage() {
       </section>
 
       <section className="px-4 py-8">
-        <div className="mx-auto max-w-4xl">
+        <div className="w-full">
           <div className="grid gap-6 md:grid-cols-3">
             {contactLinks.map((link) => (
               <Link
@@ -104,7 +104,7 @@ export default function ContactPage() {
       </section>
 
       <section className="px-4 py-8">
-        <div className="mx-auto max-w-4xl">
+        <div className="w-full">
           <Window title="status.txt">
             <div className="space-y-4">
               <div className="flex items-center gap-3">
@@ -132,7 +132,7 @@ export default function ContactPage() {
       </section>
 
       <section className="px-4 py-8">
-        <div className="mx-auto max-w-4xl">
+        <div className="w-full">
           <div className="border-2 border-dashed border-border p-8 text-center">
             <p className="font-mono text-sm text-muted-foreground">
               {"// Prefer a quick chat?"}
