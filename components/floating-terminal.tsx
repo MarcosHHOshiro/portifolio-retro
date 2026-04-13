@@ -26,6 +26,7 @@ let terminalEntryId = 0
 
 const WINDOW_MARGIN = 16
 const WINDOW_TOP_OFFSET = 88
+const TOGGLE_BUTTON_CLEARANCE = 72
 const DEFAULT_SIZE: Size = {
   width: 800,
   height: 500,
@@ -93,12 +94,12 @@ const renderCommandEntry = (text: string) => (
 
 const createInitialHistory = () => [
   createEntry("system", "Floating terminal v1.0.4 initialized..."),
-  createEntry("output", "Bem-vindo, Marcos. Sistema pronto para operacao."),
+  createEntry("output", "Welcome, Marcos. System ready for operation."),
   createEntry("output", ""),
-  createEntry("output", "Arraste a barra de titulo para mover esta janela."),
-  createEntry("output", "Dica: Digite 'matrix' para ativar o efeito visual."),
-  createEntry("output", "Digite 'close' para fechar o terminal."),
-  createEntry("output", "Digite 'help' para listar os comandos."),
+  createEntry("output", "Drag the title bar to move this window."),
+  createEntry("output", "Tip: Type 'matrix' to activate the visual effect."),
+  createEntry("output", "Type 'close' to close the terminal."),
+  createEntry("output", "Type 'help' to list the commands."),
   createEntry("divider", ""),
 ]
 
@@ -106,6 +107,7 @@ export function FloatingTerminal() {
   const router = useRouter()
   const [command, setCommand] = useState("")
   const [history, setHistory] = useState<TerminalEntry[]>(() => createInitialHistory())
+  const [isDesktop, setIsDesktop] = useState(false)
   const [matrixEnabled, setMatrixEnabled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [isReady, setIsReady] = useState(false)
@@ -138,15 +140,15 @@ export function FloatingTerminal() {
   const appendHelp = () => {
     setHistory((currentHistory) => [
       ...currentHistory,
-      createEntry("help-title", "Comandos disponiveis:"),
-      createEntry("help-row", "about - Ver bio do Marcos"),
-      createEntry("help-row", "projects - Listar projetos principais"),
-      createEntry("help-row", "contact - Abrir pagina de contato"),
-      createEntry("help-row", "matrix - Ativar efeito rain"),
-      createEntry("help-row", "exit - Parar efeito matrix"),
-      createEntry("help-row", "close - Fechar o terminal"),
-      createEntry("help-row", "clear - Limpar o terminal"),
-      createEntry("help-row", "social - Links de contacto"),
+      createEntry("help-title", "Available commands:"),
+      createEntry("help-row", "about - View Marcos' bio"),
+      createEntry("help-row", "projects - List main projects"),
+      createEntry("help-row", "contact - Open the contact page"),
+      createEntry("help-row", "matrix - Enable the rain effect"),
+      createEntry("help-row", "exit - Stop the matrix effect"),
+      createEntry("help-row", "close - Close the terminal"),
+      createEntry("help-row", "clear - Clear the terminal"),
+      createEntry("help-row", "social - Contact links"),
     ])
   }
 
@@ -189,12 +191,12 @@ export function FloatingTerminal() {
   const getDockedPosition = (nextSize = sizeRef.current) =>
     clampPosition(
       window.innerWidth - nextSize.width - WINDOW_MARGIN,
-      window.innerHeight - nextSize.height - WINDOW_MARGIN,
+      window.innerHeight - nextSize.height - WINDOW_MARGIN - TOGGLE_BUTTON_CLEARANCE,
       nextSize
     )
 
   const navigateToRoute = (target: keyof typeof routeCommands) => {
-    appendOutput(`Abrindo ${target}...`)
+    appendOutput(`Opening ${target}...`)
 
     window.setTimeout(() => {
       router.push(routeCommands[target])
@@ -203,7 +205,7 @@ export function FloatingTerminal() {
 
   const openSocial = (target: keyof typeof socialCommands) => {
     const social = socialCommands[target]
-    appendOutput(`Abrindo ${social.label}...`)
+    appendOutput(`Opening ${social.label}...`)
 
     window.setTimeout(() => {
       if (social.href.startsWith("mailto:")) {
@@ -221,10 +223,37 @@ export function FloatingTerminal() {
       y: WINDOW_TOP_OFFSET,
     })
     updateSize(nextSize)
-    updatePosition(getDockedPosition(nextSize))
+    updatePosition(
+      clampPosition(
+        window.innerWidth - nextSize.width - WINDOW_MARGIN,
+        window.innerHeight - nextSize.height - WINDOW_MARGIN - TOGGLE_BUTTON_CLEARANCE,
+        nextSize
+      )
+    )
     setIsReady(true)
     hasDraggedRef.current = false
   }
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 768px)")
+    const updateIsDesktop = () => {
+      setIsDesktop(mediaQuery.matches)
+
+      if (!mediaQuery.matches) {
+        setIsOpen(false)
+      }
+    }
+
+    updateIsDesktop()
+
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", updateIsDesktop)
+      return () => mediaQuery.removeEventListener("change", updateIsDesktop)
+    }
+
+    mediaQuery.addListener(updateIsDesktop)
+    return () => mediaQuery.removeListener(updateIsDesktop)
+  }, [])
 
   useEffect(() => {
     const syncPosition = () => {
@@ -460,7 +489,7 @@ export function FloatingTerminal() {
     if (normalizedCommand === "social") {
       setHistory((currentHistory) => [
         ...currentHistory,
-        createEntry("help-title", "Links de contacto:"),
+        createEntry("help-title", "Contact links:"),
         createEntry("help-row", `github - ${personalInfo.github}`),
         createEntry("help-row", `linkedin - ${personalInfo.linkedin}`),
         createEntry("help-row", `email - ${personalInfo.email}`),
@@ -482,23 +511,23 @@ export function FloatingTerminal() {
 
     if (normalizedCommand === "matrix") {
       if (matrixEnabled) {
-        appendOutput("Efeito Matrix ja esta em execucao.")
+        appendOutput("Matrix effect is already running.")
         return
       }
 
       setMatrixEnabled(true)
-      appendOutput("Protocolo Matrix ativado.")
+      appendOutput("Matrix protocol enabled.")
       return
     }
 
     if (normalizedCommand === "exit") {
       if (!matrixEnabled) {
-        appendOutput("Nenhum efeito Matrix ativo no momento.")
+        appendOutput("No Matrix effect is currently active.")
         return
       }
 
       setMatrixEnabled(false)
-      appendOutput("Protocolo finalizado.")
+      appendOutput("Protocol terminated.")
       return
     }
 
@@ -509,7 +538,7 @@ export function FloatingTerminal() {
 
     if (normalizedCommand === "dock") {
       dockToCorner()
-      appendOutput("Terminal reposicionado no canto.")
+      appendOutput("Terminal moved back to the corner.")
       return
     }
 
@@ -518,7 +547,7 @@ export function FloatingTerminal() {
       return
     }
 
-    appendError(`Comando nao reconhecido: '${normalizedCommand}'. Digite 'help' para ajuda.`)
+    appendError(`Command not recognized: '${normalizedCommand}'. Type 'help' for help.`)
   }
 
   const renderEntry = (entry: TerminalEntry): ReactNode => {
@@ -547,28 +576,30 @@ export function FloatingTerminal() {
 
   return (
     <div className="pointer-events-none fixed inset-0 z-50">
-      <button
-        type="button"
-        onClick={() => {
-          setIsOpen((current) => {
-            const next = !current
+      {isDesktop ? (
+        <button
+          type="button"
+          onClick={() => {
+            setIsOpen((current) => {
+              const next = !current
 
-            if (!current) {
-              window.requestAnimationFrame(() => {
-                dockToCorner()
-                inputRef.current?.focus()
-              })
-            }
+              if (!current) {
+                window.requestAnimationFrame(() => {
+                  dockToCorner()
+                  inputRef.current?.focus()
+                })
+              }
 
-            return next
-          })
-        }}
-        className="pointer-events-auto fixed right-4 bottom-4 border border-[#333] bg-[#111] px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-[#00ff41] shadow-[0_10px_24px_rgba(0,0,0,0.45)]"
-      >
-        {isOpen ? "Close Terminal" : "Open Terminal"}
-      </button>
+              return next
+            })
+          }}
+          className="pointer-events-auto fixed right-4 bottom-4 border border-[#333] bg-[#111] px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-[#00ff41] shadow-[0_10px_24px_rgba(0,0,0,0.45)]"
+        >
+          {isOpen ? "Close Terminal" : "Open Terminal"}
+        </button>
+      ) : null}
 
-      {isOpen ? (
+      {isDesktop && isOpen ? (
         <div
           ref={terminalRef}
           className="pointer-events-auto fixed overflow-hidden rounded-[8px] border border-[#333] bg-[#0a0a0a] font-mono text-[#00ff41] shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
