@@ -57,10 +57,16 @@ export function Hero() {
 
   const typedIntro = displayedText.slice(0, nameStartIndex)
   const typedName = displayedText.slice(nameStartIndex)
-  const sideNotes = [
-    { label: "Focus", value: "Fullstack systems and interfaces" },
-    { label: "Stack", value: "React, Next.js, Node.js, APIs" },
-    { label: "Approach", value: "Clean architecture, performance, UX" },
+  const folderTree = [
+    { depth: 0, label: "portfolio/", type: "root" as const },
+    { depth: 1, label: "projects/", type: "folder" as const, href: "/projects", active: true },
+    { depth: 2, label: "food-ordering-app/", type: "folder" as const, href: "/projects/food-ordering-app" },
+    { depth: 2, label: "gym-pass-style-app-node/", type: "folder" as const, href: "/projects/gym-pass-style-app-node" },
+    { depth: 2, label: "biolinks/", type: "folder" as const, href: "/projects/biolinks" },
+    { depth: 2, label: "auth-service/", type: "folder" as const, href: "/projects/auth-service" },
+    { depth: 1, label: "about/", type: "folder" as const, href: "/about" },
+    { depth: 1, label: "contact/", type: "folder" as const, href: "/contact" },
+    { depth: 1, label: "resume.pdf", type: "file" as const },
   ]
 
   return (
@@ -120,33 +126,62 @@ export function Hero() {
               </div>
             </div>
 
-            <div className="hero-visual-shell">
-              <div className="hero-info-panel">
-                <div className="space-y-2 border-b border-dashed border-border pb-4">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-                    Current Mode
-                  </p>
-                  <p className="text-2xl font-bold tracking-tight">Building thoughtful digital products.</p>
+            <div className="hidden xl:block">
+              <div className="hero-info-panel shadow-[8px_8px_0_0_var(--color-border)]">
+                <div className="space-y-3 border-b border-dashed border-border pb-4">
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                      Folder Structure
+                    </p>
+                    <span className="border border-border px-2 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                      ~/portfolio
+                    </span>
+                  </div>
+                  <p className="text-2xl font-bold tracking-tight">A cleaner map of the portfolio.</p>
                 </div>
 
-                <div className="grid gap-3 pt-5">
-                  {sideNotes.map((note) => (
-                    <div key={note.label} className="border border-dashed border-border bg-card px-4 py-3">
-                      <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                        {note.label}
-                      </p>
-                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{note.value}</p>
-                    </div>
-                  ))}
+                <div className="mt-5 border-2 border-border bg-card">
+                  <div className="flex items-center justify-between border-b-2 border-border bg-secondary px-3 py-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                    <span>Directory Tree</span>
+                    <span>/projects</span>
+                  </div>
+
+                  <div className="px-4 py-4 font-mono text-[12px] leading-6">
+                    {folderTree.map((item) => {
+                      const content = (
+                        <span
+                          className={`block border px-2 py-1 transition-colors ${
+                            item.active
+                              ? "border-border bg-secondary text-foreground"
+                              : "border-transparent text-muted-foreground"
+                          }`}
+                          style={{ paddingLeft: `${item.depth * 18 + 8}px` }}
+                        >
+                          <span className="mr-2 text-foreground/70">{item.type === "file" ? "·" : "▸"}</span>
+                          <span className={item.active ? "text-foreground" : undefined}>{item.label}</span>
+                        </span>
+                      )
+
+                      if (!item.href) {
+                        return <div key={`${item.depth}-${item.label}`}>{content}</div>
+                      }
+
+                      return (
+                        <Link key={`${item.depth}-${item.label}`} href={item.href} className="block hover:bg-secondary/40">
+                          {content}
+                        </Link>
+                      )
+                    })}
+                  </div>
                 </div>
               </div>
 
               <div className="mt-4 grid gap-2 border-2 border-border bg-secondary p-3 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground sm:grid-cols-2">
                 <div className="border border-dashed border-border bg-card px-3 py-2">
-                  Hero Panel
+                  Explorer View
                 </div>
                 <div className="border border-dashed border-border bg-card px-3 py-2 sm:text-right">
-                  Static Layout
+                  Folder Map
                 </div>
               </div>
             </div>

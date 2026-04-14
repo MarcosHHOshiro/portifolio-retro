@@ -151,6 +151,19 @@
     position: relative;
   }
 
+  .page-shell {
+    margin: 0 14px 14px;
+    border: 2px solid var(--color-border);
+    border-top: 0;
+    background: color-mix(in srgb, var(--color-background) 96%, white);
+  }
+
+  @media (max-width: 767px) {
+    .page-shell {
+      margin: 0 8px 8px;
+    }
+  }
+
   ::selection {
     background: var(--foreground);
     color: var(--background);
@@ -189,11 +202,6 @@
     radial-gradient(circle at center, color-mix(in srgb, var(--color-background) 20%, transparent), transparent 58%),
     linear-gradient(180deg, color-mix(in srgb, var(--color-card) 92%, transparent), color-mix(in srgb, var(--color-secondary) 70%, transparent));
   perspective: 1200px;
-}
-
-.hero-visual-shell {
-  display: grid;
-  gap: 0;
 }
 
 .hero-info-panel {

@@ -3,13 +3,13 @@ import Link from "next/link"
 import { projectTypeLabel, type Project } from "@/lib/data"
 
 const projectTypeClasses = {
-  fullstack: "bg-blue-100 text-foreground",
-  backend: "bg-green-100 text-foreground",
+  fullstack: "bg-[#f4efc9] text-foreground",
+  backend: "bg-[#dcebc9] text-foreground",
   frontend: "bg-secondary text-foreground",
 } as const
 
 const projectSizes: Record<string, string> = {
-  "food-ordering-app": "9.4 MB",
+  "food-ordering-app": "2.4 MB",
   "gym-pass-style-app-node": "1.2 MB",
   biolinks: "3.8 MB",
   "auth-service": "2.1 MB",
@@ -19,22 +19,31 @@ type ProjectCardProps = {
   project: Project
   titleAs?: "h2" | "h3"
   techCount?: number
+  variant?: "default" | "featured"
 }
 
 export function ProjectCard({
   project,
   titleAs = "h3",
   techCount = 4,
+  variant = "default",
 }: ProjectCardProps) {
   const TitleTag = titleAs
+  const isFeatured = variant === "featured"
 
   return (
     <Link
       href={`/projects/${project.slug}`}
       className="group block h-full"
     >
-      <article className="flex h-full flex-col border-2 border-border bg-card transition-all duration-200 group-hover:bg-background">
-        <div className="flex items-center justify-between border-b-2 border-border bg-card px-3 py-2 font-mono text-[11px]">
+      <article
+        className={
+          isFeatured
+            ? "flex h-full flex-col border-2 border-border bg-card shadow-[8px_8px_0_0_var(--color-border)] transition-all duration-200 group-hover:translate-x-1 group-hover:translate-y-1 group-hover:shadow-none"
+            : "flex h-full flex-col border-2 border-border bg-card transition-all duration-200 group-hover:bg-background"
+        }
+      >
+        <div className="flex items-center justify-between border-b-2 border-border bg-card px-3 py-2 font-mono text-[10px] font-bold">
           <span className="truncate">{`${project.slug}.exe`}</span>
           <span className="shrink-0">{projectSizes[project.slug] ?? "4.0 MB"}</span>
         </div>
@@ -57,16 +66,30 @@ export function ProjectCard({
           )}
         </div>
 
-        <div className="flex flex-1 flex-col p-6">
+        <div className={isFeatured ? "flex flex-1 flex-col p-5" : "flex flex-1 flex-col p-6"}>
           <span
-            className={`mb-4 inline-flex w-fit border border-border px-2 py-1 font-mono text-[10px] uppercase tracking-wide ${projectTypeClasses[project.type]}`}
+            className={`mb-4 inline-flex w-fit border-2 border-border px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-wide ${projectTypeClasses[project.type]}`}
           >
             {projectTypeLabel[project.type]}
           </span>
 
-          <TitleTag className="text-2xl font-bold tracking-tight text-balance">{project.title}</TitleTag>
+          <TitleTag
+            className={
+              isFeatured
+                ? "text-[2rem] leading-tight font-bold tracking-[-0.03em] text-balance"
+                : "text-2xl font-bold tracking-tight text-balance"
+            }
+          >
+            {project.title}
+          </TitleTag>
 
-          <p className="mt-4 flex-1 text-base leading-relaxed text-muted-foreground">
+          <p
+            className={
+              isFeatured
+                ? "mt-4 flex-1 text-base leading-8 text-muted-foreground line-clamp-3"
+                : "mt-4 flex-1 text-base leading-relaxed text-muted-foreground"
+            }
+          >
             {project.description}
           </p>
 
@@ -76,20 +99,24 @@ export function ProjectCard({
             </p>
           ) : null}
 
-          <div className="mt-6 flex flex-wrap gap-2">
-            {project.stack.slice(0, techCount).map((tech) => (
-              <span
-                key={tech}
-                className="border border-border px-2 py-1 font-mono text-[10px] uppercase tracking-wide"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
+          {isFeatured ? null : (
+            <>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {project.stack.slice(0, techCount).map((tech) => (
+                  <span
+                    key={tech}
+                    className="border border-border px-2 py-1 font-mono text-[10px] uppercase tracking-wide"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
 
-          <span className="mt-8 inline-block w-fit border-b-2 border-foreground text-base font-bold transition-all group-hover:pr-2">
-            View details {"->"}
-          </span>
+              <span className="mt-8 inline-block w-fit border-b-2 border-foreground text-base font-bold transition-all group-hover:pr-2">
+                View details {"->"}
+              </span>
+            </>
+          )}
         </div>
       </article>
     </Link>
