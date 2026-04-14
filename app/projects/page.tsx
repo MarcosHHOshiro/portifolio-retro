@@ -14,7 +14,7 @@ export default function ProjectsPage() {
   return (
     <>
       <section className="px-4 pt-24 pb-8 md:pt-28">
-        <div className="w-full">
+        <div className="content-shell">
           <Window title="projects.dir">
             <div className="space-y-4">
               <div className="flex items-center gap-2">
@@ -33,7 +33,7 @@ export default function ProjectsPage() {
       </section>
 
       <section className="px-4 pb-4">
-        <div className="w-full">
+        <div className="content-shell">
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {projects.map((project) => (
               <ProjectCard key={project.slug} project={project} titleAs="h2" techCount={4} />

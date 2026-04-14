@@ -7,7 +7,7 @@ export function FeaturedProjects() {
 
   return (
     <section className="px-4 py-14 md:py-18">
-      <div className="w-full">
+      <div className="content-shell">
         <div className="mb-10 flex flex-col gap-6 md:mb-12">
           <div className="flex items-center justify-between gap-4">
             <div className="flex min-w-0 items-center gap-4">

@@ -9,7 +9,7 @@ const links = [
 export function QuickLinks() {
   return (
     <section className="px-4 py-10">
-      <div className="w-full">
+      <div className="content-shell">
         <div className="mb-6 flex items-center gap-4">
           <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
             Quick Access

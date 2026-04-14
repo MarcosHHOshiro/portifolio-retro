@@ -151,17 +151,10 @@
     position: relative;
   }
 
-  .page-shell {
-    margin: 0 14px 14px;
-    border: 2px solid var(--color-border);
-    border-top: 0;
-    background: color-mix(in srgb, var(--color-background) 96%, white);
-  }
-
-  @media (max-width: 767px) {
-    .page-shell {
-      margin: 0 8px 8px;
-    }
+  .content-shell {
+    width: 100%;
+    max-width: 1760px;
+    margin-inline: auto;
   }
 
   ::selection {

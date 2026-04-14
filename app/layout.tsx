@@ -53,7 +53,7 @@ export default function RootLayout({
         >
           <Header />
           <FloatingTerminal />
-          <main className="page-shell">
+          <main>
             {children}
           </main>
         </ThemeProvider>

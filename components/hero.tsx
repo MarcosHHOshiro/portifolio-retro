@@ -71,7 +71,7 @@ export function Hero() {
 
   return (
     <section className="px-4 pt-24 pb-10 md:pt-28 md:pb-14">
-      <div className="w-full">
+      <div className="content-shell">
         <Window title="welcome.txt">
           <div className="grid gap-8 xl:grid-cols-[minmax(0,1.35fr)_minmax(340px,460px)] xl:items-center">
             <div className="space-y-6">

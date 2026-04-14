@@ -4,7 +4,7 @@ import { personalInfo } from "@/lib/data"
 export function Footer() {
   return (
     <footer className="mt-8 border-t-2 border-border px-4 py-8">
-      <div className="w-full">
+      <div className="content-shell">
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <div className="flex items-center gap-4">
             <span className="font-mono text-sm text-muted-foreground">
