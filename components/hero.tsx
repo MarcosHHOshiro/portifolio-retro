@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import { ChevronDown, ChevronRight, FileText, Folder } from "lucide-react"
 import { Window } from "./window"
 
 const introText = "Hello. I'm Marcos!"
@@ -127,38 +128,72 @@ export function Hero() {
             </div>
 
             <div className="hidden xl:block">
-              <div className="hero-info-panel shadow-[8px_8px_0_0_var(--color-border)]">
-                <div className="space-y-3 border-b border-dashed border-border pb-4">
+              <div className="hero-info-panel">
+                <div className="space-y-3 pb-5">
                   <div className="flex items-center justify-between gap-3">
-                    <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                    <p className="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
                       Folder Structure
                     </p>
                     <span className="border border-border px-2 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
                       ~/portfolio
                     </span>
                   </div>
-                  <p className="text-2xl font-bold tracking-tight">A cleaner map of the portfolio.</p>
+                  <p className="max-w-[12ch] text-4xl leading-[1.05] font-bold tracking-[-0.04em]">
+                    A cleaner map of the portfolio.
+                  </p>
                 </div>
 
-                <div className="mt-5 border-2 border-border bg-card">
-                  <div className="flex items-center justify-between border-b-2 border-border bg-secondary px-3 py-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                <div className="border-2 border-border bg-card">
+                  <div className="flex items-center justify-between border-b-2 border-border bg-secondary px-3 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
                     <span>Directory Tree</span>
                     <span>/projects</span>
                   </div>
 
-                  <div className="px-4 py-4 font-mono text-[12px] leading-6">
+                  <div className="space-y-1 px-4 py-4 font-mono text-[12px] leading-7 text-muted-foreground">
                     {folderTree.map((item) => {
+                      const isProjectChild = item.depth === 2
                       const content = (
-                        <span
-                          className={`block border px-2 py-1 transition-colors ${
-                            item.active
-                              ? "border-border bg-secondary text-foreground"
-                              : "border-transparent text-muted-foreground"
-                          }`}
-                          style={{ paddingLeft: `${item.depth * 18 + 8}px` }}
-                        >
-                          <span className="mr-2 text-foreground/70">{item.type === "file" ? "·" : "▸"}</span>
-                          <span className={item.active ? "text-foreground" : undefined}>{item.label}</span>
+                        <span className="relative block" style={{ paddingLeft: `${item.depth * 18}px` }}>
+                          {item.depth > 0 ? (
+                            <span
+                              aria-hidden="true"
+                              className="absolute top-0 bottom-0 border-l border-border/70"
+                              style={{ left: `${item.depth * 18 - 10}px` }}
+                            />
+                          ) : null}
+
+                          <span
+                            className={`flex items-center gap-2 px-2 py-0.5 transition-colors ${
+                              item.active ? "bg-secondary text-foreground" : ""
+                            }`}
+                          >
+                            {item.type === "file" ? (
+                              <>
+                                <FileText className="h-3.5 w-3.5 shrink-0" />
+                                <span>{item.label}</span>
+                              </>
+                            ) : (
+                              <>
+                                {item.depth < 2 ? (
+                                  <ChevronDown className="h-3.5 w-3.5 shrink-0" />
+                                ) : (
+                                  <ChevronRight className="h-3.5 w-3.5 shrink-0 opacity-70" />
+                                )}
+                                <Folder className="h-3.5 w-3.5 shrink-0" />
+                                <span className={item.active ? "text-foreground" : undefined}>
+                                  {item.label}
+                                </span>
+                              </>
+                            )}
+                          </span>
+
+                          {isProjectChild ? (
+                            <span
+                              aria-hidden="true"
+                              className="absolute top-0 h-6 w-3 border-l-2 border-b-2 border-border"
+                              style={{ left: `${item.depth * 18 - 10}px` }}
+                            />
+                          ) : null}
                         </span>
                       )
 
@@ -167,21 +202,25 @@ export function Hero() {
                       }
 
                       return (
-                        <Link key={`${item.depth}-${item.label}`} href={item.href} className="block hover:bg-secondary/40">
+                        <Link
+                          key={`${item.depth}-${item.label}`}
+                          href={item.href}
+                          className="block hover:bg-secondary/40"
+                        >
                           {content}
                         </Link>
                       )
                     })}
                   </div>
                 </div>
-              </div>
 
-              <div className="mt-4 grid gap-2 border-2 border-border bg-secondary p-3 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground sm:grid-cols-2">
-                <div className="border border-dashed border-border bg-card px-3 py-2">
-                  Explorer View
-                </div>
-                <div className="border border-dashed border-border bg-card px-3 py-2 sm:text-right">
-                  Folder Map
+                <div className="mt-6 grid gap-3 font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-muted-foreground sm:grid-cols-2">
+                  <div className="border-2 border-dashed border-border bg-transparent px-3 py-3 text-center">
+                    Explorer View
+                  </div>
+                  <div className="border-2 border-dashed border-border bg-transparent px-3 py-3 text-center">
+                    Folder Map
+                  </div>
                 </div>
               </div>
             </div>

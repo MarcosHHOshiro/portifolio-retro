@@ -5,13 +5,12 @@ import { projectTypeLabel, projects } from "@/lib/data"
 import type { Metadata } from "next"
 import {
   ArrowLeft,
-  ArrowUpRight,
-  Check,
   Code2,
-  ShieldAlert,
-  Sparkles,
-  TerminalSquare,
-  Workflow,
+  ExternalLink,
+  ShieldCheck,
+  Zap,
+  Layers,
+  ChevronRight,
 } from "lucide-react"
 
 const projectTypeClasses = {
@@ -21,7 +20,13 @@ const projectTypeClasses = {
 } as const
 
 const detailCardClass =
-  "border-2 border-border bg-card p-5 shadow-[6px_6px_0_0_var(--color-border)] md:p-6"
+  "min-w-0 border-2 border-border bg-card p-4 shadow-[4px_4px_0_0_var(--color-border)] transition-all hover:shadow-[8px_8px_0_0_var(--color-border)] sm:p-6"
+
+const actionButtonClass =
+  "inline-flex min-w-0 w-full items-center justify-center gap-2 border-2 border-foreground px-4 py-3 text-center font-mono text-[11px] font-bold uppercase tracking-[0.12em] transition-transform duration-150 ease-out hover:translate-x-[3px] hover:translate-y-[3px] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-foreground/15 active:translate-x-[5px] active:translate-y-[5px] sm:px-8 sm:py-4 sm:text-sm sm:tracking-[0.16em]"
+
+const editorialCardClass =
+  "min-w-0 border-2 border-border bg-card p-5 shadow-[5px_5px_0_0_var(--color-border)] sm:p-6"
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>
@@ -30,7 +35,7 @@ interface ProjectPageProps {
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params
   const project = projects.find((p) => p.slug === slug)
-  
+
   if (!project) {
     return { title: "Project Not Found" }
   }
@@ -64,53 +69,50 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   return (
     <>
       <section className="px-4 pt-20 pb-8 md:pt-24">
-        <div className="content-shell">
+        <div className="mx-auto max-w-6xl">
           <Link
             href="/projects"
-            className="mb-8 inline-flex items-center gap-2 font-mono text-sm uppercase tracking-[0.18em] hover:underline"
+            className="mb-8 inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-[0.16em] transition-transform hover:-translate-x-1"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to Projects
+            Voltar Para Projetos
           </Link>
 
-          <div className="grid gap-8 xl:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] xl:items-start">
-            <div className="space-y-6 xl:sticky xl:top-24">
-              <div className="flex flex-wrap items-center gap-2">
-                {project.stack.slice(0, 3).map((tech) => (
-                  <span
-                    key={tech}
-                    className="border border-border bg-background px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-wide"
-                  >
-                    {tech}
-                  </span>
-                ))}
-                <span
-                  className={`border px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-wide ${projectTypeClasses[project.type]}`}
-                >
-                  {projectTypeLabel[project.type]}
-                </span>
-                {isUnderConstruction && (
-                  <span className="border border-border bg-secondary px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
-                    Under Construction
-                  </span>
-                )}
-              </div>
-
+          <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
+            <div className="min-w-0 space-y-6 sm:space-y-8 lg:col-span-5">
               <div className="space-y-4">
-                <p className="font-mono text-xs uppercase tracking-[0.28em] text-muted-foreground">
-                  {project.category} case study
-                </p>
-                <h1 className="max-w-3xl text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
+                <div className="flex flex-wrap gap-2">
+                  {project.stack.slice(0, 3).map((tech) => (
+                    <span
+                      key={tech}
+                      className="rounded-full border border-black/20 bg-card px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wide"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                  <span
+                    className={`rounded-full border px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wide ${projectTypeClasses[project.type]}`}
+                  >
+                    {projectTypeLabel[project.type]}
+                  </span>
+                  {isUnderConstruction && (
+                    <span className="rounded-full border border-border bg-secondary px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wide text-muted-foreground">
+                      Under Construction
+                    </span>
+                  )}
+                </div>
+
+                <h1 className="break-words text-4xl font-black tracking-tighter leading-none sm:text-6xl lg:text-7xl">
                   {project.title}
                 </h1>
-                <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-[1.45rem] md:leading-[1.6]">
+                <p className="max-w-xl break-words font-sans text-base leading-relaxed text-black/70 sm:text-lg">
                   {project.longDescription}
                 </p>
               </div>
 
-              <div className="flex flex-wrap gap-4 pt-2">
+              <div className="grid grid-cols-2 gap-4 pt-2">
                 {isUnderConstruction ? (
-                  <span className="border-2 border-border bg-secondary px-5 py-3 font-mono text-sm font-bold uppercase tracking-[0.18em] text-muted-foreground">
+                  <span className="col-span-2 inline-flex w-full items-center justify-center gap-2 border-2 border-border bg-secondary px-5 py-3 text-center font-mono text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground sm:px-8 sm:py-4 sm:text-sm sm:tracking-[0.16em]">
                     This project is under construction
                   </span>
                 ) : (
@@ -120,11 +122,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-3 border-2 border-foreground bg-primary px-5 py-3 font-mono text-sm font-bold uppercase tracking-[0.18em] text-primary-foreground transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none"
-                        style={{ boxShadow: "4px 4px 0 0 var(--foreground)" }}
+                        className={`${actionButtonClass} bg-primary text-primary-foreground`}
+                        style={{
+                          boxShadow: "5px 5px 0 0 rgba(120, 120, 120, 0.55)",
+                        }}
                       >
                         <Code2 className="h-4 w-4" />
-                        View Code
+                        Ver Codigo
                       </Link>
                     )}
                     {project.demo && (
@@ -132,10 +136,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                         href={project.demo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-3 border-2 border-foreground bg-card px-5 py-3 font-mono text-sm font-bold uppercase tracking-[0.18em] text-foreground transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none"
-                        style={{ boxShadow: "4px 4px 0 0 var(--foreground)" }}
+                        className={`${actionButtonClass} bg-card text-foreground`}
+                        style={{
+                          boxShadow: "5px 5px 0 0 rgba(0, 0, 0, 0.95)",
+                        }}
                       >
-                        <ArrowUpRight className="h-4 w-4" />
+                        <ExternalLink className="h-4 w-4" />
                         Live Demo
                       </Link>
                     )}
@@ -143,99 +149,79 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 )}
               </div>
 
-              <div className={`${detailCardClass} max-w-2xl`}>
-                <div className="flex items-center gap-3 border-b border-border/70 pb-3 font-mono text-xs uppercase tracking-[0.2em]">
-                  <div className="flex items-center gap-1.5">
-                    <span className="h-2.5 w-2.5 rounded-full bg-[#ff6b6b]" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-[#ffd166]" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-[#7bd88f]" />
-                  </div>
-                  <span className="text-muted-foreground">
-                    $ {project.validationCommand ?? "status check"}
-                  </span>
-                  <span
-                    className={`ml-auto font-bold ${
-                      isUnderConstruction ? "text-amber-600" : "text-emerald-600"
-                    }`}
-                  >
-                    {isUnderConstruction ? "WIP" : "PASS"}
-                  </span>
+              <div className="hidden min-w-0 border-2 border-border bg-card p-4 shadow-[8px_8px_0_0_var(--color-border)] lg:block">
+                <div className="mb-3 flex gap-1.5">
+                  <span className="h-2 w-2 rounded-full bg-red-400" />
+                  <span className="h-2 w-2 rounded-full bg-yellow-400" />
+                  <span className="h-2 w-2 rounded-full bg-green-400" />
                 </div>
-
-                <div className="mt-4 space-y-2.5 font-mono text-sm">
+                <div className="space-y-1.5 font-mono text-[11px] leading-tight text-muted-foreground">
+                  <div className="mb-1 flex items-center justify-between border-b border-black/10 pb-1">
+                    <span>$ {project.validationCommand ?? "status check"}</span>
+                    <span className={isUnderConstruction ? "text-amber-600" : "text-emerald-600"}>
+                      {isUnderConstruction ? "WIP" : "PASS"}
+                    </span>
+                  </div>
                   {validationChecks.map((item) => (
-                    <div key={item} className="flex items-start gap-2.5 text-muted-foreground">
-                      <Check
-                        className={`mt-0.5 h-4 w-4 shrink-0 ${
-                          isUnderConstruction ? "text-amber-600" : "text-emerald-600"
-                        }`}
-                      />
-                      <span>{item}</span>
+                    <div key={item} className="break-words">
+                      {"\u2713"} {item}
                     </div>
                   ))}
                 </div>
               </div>
             </div>
 
-            <div className="space-y-6">
-              <article className={detailCardClass}>
-                <div className="flex items-center gap-3 font-mono text-sm font-bold uppercase tracking-[0.22em] text-[#ef4444]">
-                  <ShieldAlert className="h-4 w-4" />
-                  The Problem
+            <div className="min-w-0 space-y-6 lg:col-span-7">
+              <section className={editorialCardClass}>
+                <div className="mb-4 flex items-center gap-2 font-mono text-sm font-black uppercase tracking-[0.2em] text-red-500">
+                  <ShieldCheck className="h-5 w-5" />
+                  O Problema
                 </div>
-                <blockquote className="mt-5 border-l-4 border-[#fecaca] pl-5 text-lg leading-relaxed text-muted-foreground italic md:text-[1.45rem] md:leading-[1.7]">
+                <p className="break-words border-l-4 border-[#ffd8d8] pl-4 font-sans text-lg leading-relaxed text-black/75 italic sm:text-[1.1rem] sm:leading-[1.85]">
                   "{project.problem}"
-                </blockquote>
-              </article>
+                </p>
+              </section>
 
-              <article className={detailCardClass}>
-                <div className="flex items-center gap-3 font-mono text-sm font-bold uppercase tracking-[0.22em] text-[#2563eb]">
-                  <Sparkles className="h-4 w-4" />
-                  The Solution
+              <section className={`${editorialCardClass} lg:mt-7`}>
+                <div className="mb-5 flex items-center gap-2 font-mono text-sm font-black uppercase tracking-[0.2em] text-blue-500">
+                  <Zap className="h-5 w-5" />
+                  A Solucao
                 </div>
-                <p className="mt-5 text-lg leading-relaxed text-foreground/90 md:text-[1.2rem] md:leading-[1.75]">
+                <p className="mb-6 break-words font-sans text-lg leading-relaxed text-black/80 sm:text-[1.05rem] sm:leading-[1.8]">
                   {project.solution}
                 </p>
 
-                <div className="mt-6 border-2 border-dashed border-border bg-secondary/35 p-4 md:p-5">
-                  <div className="flex items-center gap-3 font-mono text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">
-                    <Workflow className="h-4 w-4" />
-                    Technical Architecture
-                  </div>
-                  <p className="mt-3 leading-relaxed text-muted-foreground">
-                    {project.architecture}
-                  </p>
-                </div>
-
-                <div className="mt-6 grid gap-3 md:grid-cols-2">
+                <div className="grid gap-4 sm:grid-cols-2">
                   {solutionHighlights.map((item) => (
                     <div
                       key={item}
-                      className="flex min-h-16 items-start gap-3 border border-border bg-background px-4 py-3 font-mono text-sm"
+                      className="group min-w-0 rounded-[2px] border border-black/8 bg-black/[0.03] px-4 py-3 transition-colors hover:bg-black hover:text-white"
                     >
-                      <span className="text-muted-foreground">{">"}</span>
-                      <span>{item}</span>
+                      <div className="flex items-start gap-2">
+                        <ChevronRight className="mt-0.5 h-4 w-4 shrink-0" />
+                        <span className="break-words font-mono text-xs font-bold leading-tight sm:text-[0.8rem]">
+                          {item}
+                        </span>
+                      </div>
                     </div>
                   ))}
                 </div>
+              </section>
 
-                <div className="mt-6">
-                  <div className="mb-3 flex items-center gap-3 font-mono text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">
-                    <TerminalSquare className="h-4 w-4" />
-                    Stack
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {project.stack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="border border-border bg-background px-3 py-1 font-mono text-xs uppercase tracking-wide"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </article>
+              <section className="flex flex-wrap items-center gap-3 py-2">
+                <Layers className="h-5 w-5 shrink-0" />
+                <span className="font-mono text-xs font-black uppercase text-gray-400">
+                  Stack:
+                </span>
+                {project.stack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="max-w-full break-words bg-black px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wide text-white"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </section>
             </div>
           </div>
         </div>
@@ -244,7 +230,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <section className="px-4 py-8">
         <div className="content-shell">
           <div className="border-t-2 border-dashed border-border pt-8">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <span className="font-mono text-sm text-muted-foreground">
                 {"// End of file"}
               </span>
