@@ -593,9 +593,10 @@ export function FloatingTerminal() {
               return next
             })
           }}
-          className="pointer-events-auto fixed right-4 bottom-4 border border-[#333] bg-[#111] px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-[#00ff41] shadow-[0_10px_24px_rgba(0,0,0,0.45)]"
+          className="pointer-events-auto fixed right-4 bottom-4 flex items-center gap-2 border border-[#0f0f0f] bg-[#050505] px-4 py-[0.65rem] font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-[#00ff41] shadow-[6px_4px_0_0_#d9d9d9]"
         >
-          {isOpen ? "Close Terminal" : "Open Terminal"}
+          <span className="text-[11px] leading-none text-[#00ff41]">&gt;_</span>
+          <span>{isOpen ? "Close Terminal" : "Open Terminal"}</span>
         </button>
       ) : null}
 
