@@ -9,6 +9,9 @@ export interface Project {
   solution: string
   architecture: string
   stack: string[]
+  solutionHighlights?: string[]
+  validationCommand?: string
+  validationChecks?: string[]
   type: ProjectType
   category: string
   status?: "under-construction"
@@ -32,6 +35,18 @@ export const projects: Project[] = [
     problem: "Keeping order status accurate when payment confirmation is asynchronous (Stripe webhooks) is challenging. The platform also requires secure authentication, authenticated API routes, reliable media uploads, and robust order creation logic.",
     solution: "Built a full-stack solution: Auth0 for authentication and protected routes, an Express API split by domains (user, restaurant, order), MongoDB/Mongoose persistence, Cloudinary for image upload, Stripe Checkout + webhook handling to transition orders from 'pending_payment' to 'paid', and a React frontend using React Query for server state.",
     architecture: "Two-app architecture: a React + Vite frontend handling auth flows, search, checkout triggers and order tracking; and a Node.js + Express backend validating tokens, enforcing business rules, persisting data in MongoDB, and processing Stripe webhooks. Backend is organized into routes, controllers, middleware (JWT validation, payload validation), and Mongoose models. Order flow: create checkout session -> create order with status 'pending_payment' -> Stripe Checkout -> webhook confirms payment -> backend updates order to 'paid'.",
+    solutionHighlights: [
+      "Stripe webhook-driven order state",
+      "Protected owner and customer flows",
+      "Cloudinary-based media uploads",
+      "React Query for reliable server state",
+    ],
+    validationCommand: "pnpm test",
+    validationChecks: [
+      "Order status sync after payment confirmation",
+      "Protected restaurant management routes",
+      "Checkout and media upload flow covered",
+    ],
     stack: ["React", "Vite", "TypeScript", "Node.js", "Express", "MongoDB", "Mongoose", "Auth0", "Stripe", "Cloudinary", "Multer", "React Query"],
     type: "fullstack",
     category: "Full Stack",
@@ -52,6 +67,18 @@ export const projects: Project[] = [
       "Implemented a layered architecture with Fastify controllers, use cases, and repository abstractions using Prisma + PostgreSQL. Added JWT/refresh-token authentication, RBAC middleware, geolocation-based validation, and automated testing with Vitest.",
     architecture:
       "Fastify exposes REST routes and handles request/response validation with Zod. Controllers delegate to use-case services that encapsulate business rules. Use cases access data through repository interfaces, with Prisma implementations for PostgreSQL and in-memory implementations for tests. Swagger/OpenAPI provides interactive API documentation.",
+    solutionHighlights: [
+      "RBAC for admin-only operations",
+      "JWT with refresh token via cookies",
+      "Swagger and OpenAPI docs",
+      "Unit and E2E coverage with Vitest",
+    ],
+    validationCommand: "npm test",
+    validationChecks: [
+      "Check-in only within 100m distance",
+      "Only one daily check-in per gym",
+      "Refresh token rotation and validation",
+    ],
     stack: [
       "Node.js",
       "TypeScript",
@@ -77,6 +104,18 @@ export const projects: Project[] = [
     problem: "Users needed a simple way to centralize multiple links in one public URL and manage them easily without editing code.",
     solution: "Built a full Laravel application with auth, profile editing, handler validation, link creation/editing/deletion, drag-like ordering controls (up/down), and a public page at /{handler} to share all links.",
     architecture: "Laravel monolith (MVC): Blade views for UI, controllers/requests/rules for business logic and validation, Eloquent models for persistence, SQLite for local storage, and Vite + TailwindCSS for frontend assets.",
+    solutionHighlights: [
+      "Unique public handler validation",
+      "Profile photo upload and customization",
+      "Link CRUD with ordering controls",
+      "Public profile page by handler",
+    ],
+    validationCommand: "php artisan test",
+    validationChecks: [
+      "Handler uniqueness rules enforced",
+      "Authenticated profile management flow",
+      "Public page renders ordered links",
+    ],
     stack: ["Laravel 12", "PHP 8.2", "SQLite", "Blade", "Tailwind CSS", "DaisyUI", "Vite"],
     type: "fullstack",
     category: "Full Stack",
@@ -92,6 +131,18 @@ export const projects: Project[] = [
     problem: "Each service in the system was implementing its own authentication, leading to inconsistent security practices and duplicated code across the organization.",
     solution: "Created a centralized authentication service with support for multiple identity providers, multi-factor authentication, and a standardized JWT-based session management system.",
     architecture: "Built with Python/FastAPI for its async capabilities. Uses PostgreSQL for user data, Redis for session storage, and implements TOTP for 2FA. Exposes both REST and gRPC interfaces for flexibility.",
+    solutionHighlights: [
+      "Centralized JWT session lifecycle",
+      "Multi-provider authentication strategy",
+      "MFA and TOTP support roadmap",
+      "REST and gRPC service interfaces",
+    ],
+    validationCommand: "pytest",
+    validationChecks: [
+      "Core auth flows still in implementation",
+      "MFA and provider adapters being finalized",
+      "Service contracts under active iteration",
+    ],
     stack: ["Python", "FastAPI", "PostgreSQL", "Redis", "gRPC", "Docker"],
     type: "backend",
     category: "Security",

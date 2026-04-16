@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import { Header } from '@/components/header'
 import { ThemeProvider } from '@/components/theme-provider'
+import { FloatingTerminal } from '@/components/floating-terminal'
 
 const spaceMono = Space_Mono({ 
   subsets: ["latin"],
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#fafafa' },
-    { media: '(prefers-color-scheme: dark)', color: '#141414' },
+    { media: '(prefers-color-scheme: dark)', color: '#0f1115' },
   ],
 }
 
@@ -51,6 +52,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
+          <FloatingTerminal />
           <main>
             {children}
           </main>

@@ -42,7 +42,7 @@ export default function ContactPage() {
   return (
     <>
       <section className="px-4 pt-20 pb-8 md:pt-24">
-        <div className="mx-auto max-w-4xl">
+        <div className="content-shell">
           <Window title="contact.sh">
             <div className="space-y-6">
               <div className="flex items-center gap-2">
@@ -63,7 +63,7 @@ export default function ContactPage() {
       </section>
 
       <section className="px-4 py-8">
-        <div className="mx-auto max-w-4xl">
+        <div className="content-shell">
           <div className="grid gap-6 md:grid-cols-3">
             {contactLinks.map((link) => (
               <Link
@@ -104,7 +104,7 @@ export default function ContactPage() {
       </section>
 
       <section className="px-4 py-8">
-        <div className="mx-auto max-w-4xl">
+        <div className="content-shell">
           <Window title="status.txt">
             <div className="space-y-4">
               <div className="flex items-center gap-3">
@@ -132,7 +132,7 @@ export default function ContactPage() {
       </section>
 
       <section className="px-4 py-8">
-        <div className="mx-auto max-w-4xl">
+        <div className="content-shell">
           <div className="border-2 border-dashed border-border p-8 text-center">
             <p className="font-mono text-sm text-muted-foreground">
               {"// Prefer a quick chat?"}
@@ -147,7 +147,7 @@ export default function ContactPage() {
               target={isPlaceholderEmail ? "_blank" : undefined}
               rel={isPlaceholderEmail ? "noopener noreferrer" : undefined}
               className="mt-6 inline-block border-2 border-foreground bg-primary px-8 py-3 font-mono text-sm font-bold uppercase tracking-wider text-primary-foreground transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
-              style={{ boxShadow: "4px 4px 0 0 var(--foreground)" }}
+              style={{ boxShadow: "4px 4px 0 0 var(--shadow-hard)" }}
             >
               {isPlaceholderEmail ? "Message on LinkedIn" : "Send Email"}
             </Link>

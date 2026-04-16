@@ -69,7 +69,7 @@ export default function AboutPage() {
   return (
     <>
       <section className="px-4 pt-20 pb-8 md:pt-24">
-        <div className="mx-auto max-w-4xl">
+        <div className="content-shell">
           <Window title="about.me">
             <div className="space-y-6">
               <div className="flex items-center gap-2">
@@ -90,7 +90,7 @@ export default function AboutPage() {
       </section>
 
       <section className="px-4 py-8">
-        <div className="mx-auto max-w-4xl space-y-6">
+        <div className="content-shell space-y-6">
           <Window title="education.txt">
             <div className="space-y-4">
               <h2 className="font-mono text-sm font-bold uppercase tracking-wider text-muted-foreground">
@@ -151,7 +151,7 @@ export default function AboutPage() {
       </section>
 
       <section className="px-4 py-8">
-        <div className="mx-auto max-w-4xl">
+        <div className="content-shell">
           <div className="border-2 border-border bg-secondary p-6 text-center">
             <p className="font-mono text-lg">
               {"Interested in working together?"}
@@ -159,7 +159,7 @@ export default function AboutPage() {
             <Link
               href="/contact"
               className="mt-4 inline-block border-2 border-foreground bg-primary px-6 py-3 font-mono text-sm font-bold uppercase tracking-wider text-primary-foreground transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
-              style={{ boxShadow: "4px 4px 0 0 var(--foreground)" }}
+              style={{ boxShadow: "4px 4px 0 0 var(--shadow-hard)" }}
             >
               Get in Touch
             </Link>

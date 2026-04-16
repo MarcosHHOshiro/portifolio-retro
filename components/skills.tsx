@@ -21,8 +21,8 @@ const skillCategories = [
 
 export function Skills() {
   return (
-    <section className="px-4 py-12">
-      <div className="mx-auto max-w-5xl">
+    <section className="px-4 py-10">
+      <div className="content-shell">
         <div className="mb-8 flex items-center gap-4">
           <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
             Tech Stack
@@ -32,7 +32,12 @@ export function Skills() {
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {skillCategories.map((category) => (
-            <Window key={category.title} title={`${category.title.toLowerCase()}/`} variant="outlined">
+            <Window
+              key={category.title}
+              title={`${category.title.toLowerCase()}/`}
+              variant="outlined"
+              className="h-full bg-card/95"
+            >
               <ul className="space-y-2">
                 {category.skills.map((skill) => (
                   <li key={skill} className="flex items-center gap-2 font-mono text-sm">
