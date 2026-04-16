@@ -147,7 +147,7 @@ export default function ContactPage() {
               target={isPlaceholderEmail ? "_blank" : undefined}
               rel={isPlaceholderEmail ? "noopener noreferrer" : undefined}
               className="mt-6 inline-block border-2 border-foreground bg-primary px-8 py-3 font-mono text-sm font-bold uppercase tracking-wider text-primary-foreground transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
-              style={{ boxShadow: "4px 4px 0 0 var(--foreground)" }}
+              style={{ boxShadow: "4px 4px 0 0 var(--shadow-hard)" }}
             >
               {isPlaceholderEmail ? "Message on LinkedIn" : "Send Email"}
             </Link>

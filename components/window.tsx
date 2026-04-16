@@ -12,8 +12,8 @@ export function Window({ title, children, className, variant = "default" }: Wind
   return (
     <div
       className={cn(
-        "relative overflow-hidden border-2 border-border bg-card shadow-[6px_6px_0_0_var(--color-border)] transition-transform duration-200",
-        "before:pointer-events-none before:absolute before:inset-0 before:bg-[linear-gradient(180deg,transparent_0%,rgba(0,0,0,0.02)_100%)] before:content-['']",
+        "relative overflow-hidden border-2 border-border bg-card shadow-[6px_6px_0_0_var(--shadow-hard)] transition-transform duration-200",
+        "before:pointer-events-none before:absolute before:inset-0 before:bg-[linear-gradient(180deg,transparent_0%,rgba(0,0,0,0.02)_100%)] before:content-[''] dark:before:bg-[linear-gradient(180deg,transparent_0%,rgba(255,255,255,0.02)_100%)]",
         variant === "outlined" && "border-dashed",
         className
       )}

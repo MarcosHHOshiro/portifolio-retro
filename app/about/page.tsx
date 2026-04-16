@@ -159,7 +159,7 @@ export default function AboutPage() {
             <Link
               href="/contact"
               className="mt-4 inline-block border-2 border-foreground bg-primary px-6 py-3 font-mono text-sm font-bold uppercase tracking-wider text-primary-foreground transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
-              style={{ boxShadow: "4px 4px 0 0 var(--foreground)" }}
+              style={{ boxShadow: "4px 4px 0 0 var(--shadow-hard)" }}
             >
               Get in Touch
             </Link>

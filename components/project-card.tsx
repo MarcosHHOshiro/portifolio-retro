@@ -3,9 +3,9 @@ import Link from "next/link"
 import { projectTypeLabel, type Project } from "@/lib/data"
 
 const projectTypeClasses = {
-  fullstack: "bg-[#f4efc9] text-foreground",
-  backend: "bg-[#dcebc9] text-foreground",
-  frontend: "bg-secondary text-foreground",
+  fullstack: "bg-[#f4efc9] text-foreground dark:bg-[#3d3822] dark:text-[#ebe2bc]",
+  backend: "bg-[#dcebc9] text-foreground dark:bg-[#233325] dark:text-[#cfe0c6]",
+  frontend: "bg-secondary text-foreground dark:bg-[#202c3b] dark:text-[#d7e3f2]",
 } as const
 
 const projectSizes: Record<string, string> = {
@@ -39,7 +39,7 @@ export function ProjectCard({
       <article
         className={
           isFeatured
-            ? "flex h-full flex-col border-2 border-border bg-card shadow-[8px_8px_0_0_var(--color-border)] transition-all duration-200 group-hover:translate-x-1 group-hover:translate-y-1 group-hover:shadow-none"
+            ? "flex h-full flex-col border-2 border-border bg-card shadow-[8px_8px_0_0_var(--shadow-hard)] transition-all duration-200 group-hover:translate-x-1 group-hover:translate-y-1 group-hover:shadow-none"
             : "flex h-full flex-col border-2 border-border bg-card transition-all duration-200 group-hover:bg-background"
         }
       >

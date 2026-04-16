@@ -64,7 +64,7 @@ const renderTerminalText = (text: string) => {
   return parts.map((part, index) => {
     if (part.startsWith("'") && part.endsWith("'") && part.length >= 2) {
       return (
-        <span key={`${part}-${index}`} className="text-[#ffd84d]">
+        <span key={`${part}-${index}`} className="text-[#ffe66d]">
           {part}
         </span>
       )
@@ -80,7 +80,7 @@ const renderHelpEntry = (text: string) => {
   return (
     <div className="flex gap-4 pl-6">
       <span className="inline-block min-w-[7rem] text-[#f1fa8c]">{commandLabel}</span>
-      {description ? <span className="text-[#00ff41]">- {description}</span> : null}
+      {description ? <span className="text-[#00ff85]">- {description}</span> : null}
     </div>
   )
 }
@@ -345,7 +345,7 @@ export function FloatingTerminal() {
     }
 
     const drawFrame = () => {
-      context.fillStyle = "rgba(2, 8, 5, 0.14)"
+      context.fillStyle = "rgba(8, 12, 18, 0.16)"
       context.fillRect(0, 0, width, height)
       context.font = `${fontSize}px var(--font-mono), monospace`
 
@@ -354,7 +354,7 @@ export function FloatingTerminal() {
         const x = columnIndex * fontSize
         const y = drops[columnIndex] * fontSize
 
-        context.fillStyle = columnIndex % 7 === 0 ? "rgba(220, 255, 231, 0.95)" : "rgba(116, 255, 170, 0.9)"
+        context.fillStyle = columnIndex % 7 === 0 ? "rgba(205, 239, 218, 0.92)" : "rgba(125, 207, 161, 0.82)"
         context.fillText(glyph, x, y)
 
         if (y > height && Math.random() > 0.975) {
@@ -552,7 +552,7 @@ export function FloatingTerminal() {
 
   const renderEntry = (entry: TerminalEntry): ReactNode => {
     if (entry.kind === "divider") {
-      return <div className="my-4 border-b border-[#1f1f1f]" />
+      return <div className="my-4 border-b border-[#2a323d]" />
     }
 
     if (entry.kind === "command") {
@@ -560,7 +560,7 @@ export function FloatingTerminal() {
     }
 
     if (entry.kind === "help-title") {
-      return <span className="text-[#00ff41]">{entry.text}</span>
+      return <span className="text-[#00ff85]">{entry.text}</span>
     }
 
     if (entry.kind === "help-row") {
@@ -593,9 +593,9 @@ export function FloatingTerminal() {
               return next
             })
           }}
-          className="pointer-events-auto fixed right-4 bottom-4 flex items-center gap-2 border border-[#0f0f0f] bg-[#050505] px-4 py-[0.65rem] font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-[#00ff41] shadow-[6px_4px_0_0_#d9d9d9]"
+          className="pointer-events-auto fixed right-4 bottom-4 flex items-center gap-2 border border-[#202833] bg-[#0d1117] px-4 py-[0.65rem] font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-[#9fd8b1] shadow-[6px_4px_0_0_rgba(203,213,225,0.24)] dark:border-[#2b3440] dark:bg-[#121720] dark:text-[#9fd8b1] dark:shadow-[6px_4px_0_0_rgba(88,102,120,0.28)]"
         >
-          <span className="text-[11px] leading-none text-[#00ff41]">&gt;_</span>
+          <span className="text-[11px] leading-none text-[#9fd8b1] dark:text-[#9fd8b1]">&gt;_</span>
           <span>{isOpen ? "Close Terminal" : "Open Terminal"}</span>
         </button>
       ) : null}
@@ -603,7 +603,7 @@ export function FloatingTerminal() {
       {isDesktop && isOpen ? (
         <div
           ref={terminalRef}
-          className="pointer-events-auto fixed overflow-hidden rounded-[8px] border border-[#333] bg-[#0a0a0a] font-mono text-[#00ff41] shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
+          className="pointer-events-auto fixed overflow-hidden rounded-[8px] border border-[#2a323d] bg-[#0f141b] font-mono text-[#00ff85] shadow-[0_20px_50px_rgba(0,0,0,0.58)]"
           style={{
             left: position.x,
             top: position.y,
@@ -614,7 +614,7 @@ export function FloatingTerminal() {
           }}
         >
           <div
-            className={`flex items-center justify-between border-b border-[#333] bg-[#1a1a1a] px-[15px] py-2 select-none ${
+            className={`flex items-center justify-between border-b border-[#2a323d] bg-[#151b23] px-[15px] py-2 select-none ${
               isDragging ? "cursor-grabbing" : "cursor-move"
             }`}
             onPointerDown={handlePointerDown}
@@ -637,12 +637,12 @@ export function FloatingTerminal() {
               <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
             </div>
 
-            <div className="text-xs tracking-[0.2em] text-[#9ca3af]">MARCOS_PORTFOLIO.EXE</div>
+            <div className="text-xs tracking-[0.2em] text-[#9ca8b3]">MARCOS_PORTFOLIO.EXE</div>
 
-            <div className="text-[10px] text-[#6b7280]">v1.0.4</div>
+            <div className="text-[10px] text-[#667384]">v1.0.4</div>
           </div>
 
-          <div ref={canvasHostRef} className="relative h-[calc(100%-37px)] overflow-hidden bg-[#0a0a0a]">
+          <div ref={canvasHostRef} className="relative h-[calc(100%-37px)] overflow-hidden bg-[#0f141b]">
             <canvas
               ref={canvasRef}
               aria-hidden="true"
@@ -654,7 +654,7 @@ export function FloatingTerminal() {
 
             <div
               ref={outputRef}
-              className="relative z-10 h-full overflow-y-auto px-5 py-5 text-[16px] leading-[1.4] [scrollbar-color:#333_transparent] [scrollbar-width:thin]"
+              className="relative z-10 h-full overflow-y-auto px-5 py-5 text-[16px] leading-[1.4] [scrollbar-color:#2a323d_transparent] [scrollbar-width:thin]"
               onClick={() => inputRef.current?.focus()}
             >
               <div
@@ -669,14 +669,14 @@ export function FloatingTerminal() {
                         : entry.kind === "system"
                           ? "whitespace-pre-wrap text-[#8be9fd]"
                         : entry.kind === "help-title"
-                          ? "mb-1 mt-2 whitespace-pre-wrap text-[#00ff41]"
+                          ? "mb-1 mt-2 whitespace-pre-wrap text-[#00ff85]"
                         : entry.kind === "help-row"
                           ? "whitespace-pre-wrap"
                         : entry.kind === "error"
-                          ? "mb-4 whitespace-pre-wrap text-[#ff5555]"
+                          ? "mb-4 whitespace-pre-wrap text-[#de7e7a]"
                         : entry.kind === "divider"
                           ? ""
-                          : "whitespace-pre-wrap text-[#00ff41]"
+                          : "whitespace-pre-wrap text-[#00ff85]"
                     }
                   >
                     {renderEntry(entry)}
@@ -690,7 +690,7 @@ export function FloatingTerminal() {
                   ref={inputRef}
                   value={command}
                   onChange={(event) => setCommand(event.target.value)}
-                  className="min-w-0 flex-1 bg-transparent text-[16px] text-[#00ff41] outline-none [text-shadow:0_0_10px_rgba(0,255,65,0.4)]"
+                  className="min-w-0 flex-1 bg-transparent text-[16px] text-[#00ff85] outline-none [text-shadow:0_0_8px_rgba(0,255,133,0.28)]"
                   placeholder=""
                   spellCheck={false}
                   autoCapitalize="off"
@@ -709,7 +709,7 @@ export function FloatingTerminal() {
               onPointerUp={handleResizePointerUp}
               onPointerCancel={handleResizePointerUp}
             >
-              <div className="absolute right-1.5 bottom-1.5 h-3.5 w-3.5 border-r border-b border-[#4c6f8e]" />
+              <div className="absolute right-1.5 bottom-1.5 h-3.5 w-3.5 border-r border-b border-[#51657d]" />
             </div>
           </div>
         </div>
