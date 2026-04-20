@@ -5,8 +5,8 @@ import { projectTypeLabel, projects } from "@/lib/data"
 import type { Metadata } from "next"
 import {
   ArrowLeft,
-  Code2,
   ExternalLink,
+  Github,
   ShieldCheck,
   Zap,
   Layers,
@@ -75,7 +75,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             className="mb-8 inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-[0.16em] transition-transform hover:-translate-x-1"
           >
             <ArrowLeft className="h-4 w-4" />
-            Voltar Para Projetos
+            Back to Projects
           </Link>
 
           <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
@@ -127,8 +127,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                           boxShadow: "5px 5px 0 0 var(--shadow-hard)",
                         }}
                       >
-                        <Code2 className="h-4 w-4" />
-                        Ver Codigo
+                        <Github className="h-4 w-4" />
+                        View Code
                       </Link>
                     )}
                     {project.demo && (
@@ -175,7 +175,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <section className={editorialCardClass}>
                 <div className="mb-4 flex items-center gap-2 font-mono text-sm font-black uppercase tracking-[0.2em] text-red-500 dark:text-[#d78382]">
                   <ShieldCheck className="h-5 w-5" />
-                  O Problema
+                  The Problem
                 </div>
                 <p className="break-words border-l-4 border-[#ffd8d8] pl-4 font-sans text-lg leading-relaxed text-black/75 italic dark:border-[#5d373a] dark:text-[#bcc4cf] sm:text-[1.1rem] sm:leading-[1.85]">
                   "{project.problem}"
@@ -185,7 +185,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <section className={`${editorialCardClass} lg:mt-7`}>
                 <div className="mb-5 flex items-center gap-2 font-mono text-sm font-black uppercase tracking-[0.2em] text-blue-500 dark:text-[#86a9d2]">
                   <Zap className="h-5 w-5" />
-                  A Solucao
+                  The Solution
                 </div>
                 <p className="mb-6 break-words font-sans text-lg leading-relaxed text-black/80 dark:text-[#c3ccd7] sm:text-[1.05rem] sm:leading-[1.8]">
                   {project.solution}
