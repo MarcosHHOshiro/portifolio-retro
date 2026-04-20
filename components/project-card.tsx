@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import { Github } from "lucide-react"
 import { projectTypeLabel, type Project } from "@/lib/data"
 
 const projectTypeClasses = {
@@ -30,18 +31,20 @@ export function ProjectCard({
 }: ProjectCardProps) {
   const TitleTag = titleAs
   const isFeatured = variant === "featured"
+  const projectHref = `/projects/${project.slug}`
+  const hasProjectLinks = Boolean(project.github || project.demo)
 
   return (
-    <Link
-      href={`/projects/${project.slug}`}
-      className="group block h-full"
+    <article
+      className={
+        isFeatured
+          ? "group flex h-full flex-col border-2 border-border bg-card shadow-[8px_8px_0_0_var(--shadow-hard)] transition-all duration-200 hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
+          : "group flex h-full flex-col border-2 border-border bg-card transition-all duration-200 hover:bg-background"
+      }
     >
-      <article
-        className={
-          isFeatured
-            ? "flex h-full flex-col border-2 border-border bg-card shadow-[8px_8px_0_0_var(--shadow-hard)] transition-all duration-200 group-hover:translate-x-1 group-hover:translate-y-1 group-hover:shadow-none"
-            : "flex h-full flex-col border-2 border-border bg-card transition-all duration-200 group-hover:bg-background"
-        }
+      <Link
+        href={projectHref}
+        className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
       >
         <div className="flex items-center justify-between border-b-2 border-border bg-card px-3 py-2 font-mono text-[10px] font-bold">
           <span className="truncate">{`${project.slug}.exe`}</span>
@@ -65,60 +68,92 @@ export function ProjectCard({
             </div>
           )}
         </div>
+      </Link>
 
-        <div className={isFeatured ? "flex flex-1 flex-col p-5" : "flex flex-1 flex-col p-6"}>
-          <span
-            className={`mb-4 inline-flex w-fit border-2 border-border px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-wide ${projectTypeClasses[project.type]}`}
-          >
-            {projectTypeLabel[project.type]}
-          </span>
+      <div className={isFeatured ? "flex flex-1 flex-col p-5" : "flex flex-1 flex-col p-6"}>
+        <span
+          className={`mb-4 inline-flex w-fit border-2 border-border px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-wide ${projectTypeClasses[project.type]}`}
+        >
+          {projectTypeLabel[project.type]}
+        </span>
 
-          <TitleTag
-            className={
-              isFeatured
-                ? "text-[2rem] leading-tight font-bold tracking-[-0.03em] text-balance"
-                : "text-2xl font-bold tracking-tight text-balance"
-            }
+        <TitleTag
+          className={
+            isFeatured
+              ? "text-[2rem] leading-tight font-bold tracking-[-0.03em] text-balance"
+              : "text-2xl font-bold tracking-tight text-balance"
+          }
+        >
+          <Link
+            href={projectHref}
+            className="transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           >
             {project.title}
-          </TitleTag>
+          </Link>
+        </TitleTag>
 
-          <p
-            className={
-              isFeatured
-                ? "mt-4 flex-1 text-base leading-8 text-muted-foreground line-clamp-3"
-                : "mt-4 flex-1 text-base leading-relaxed text-muted-foreground"
-            }
-          >
-            {project.description}
+        <p
+          className={
+            isFeatured
+              ? "mt-4 flex-1 text-base leading-8 text-muted-foreground line-clamp-3"
+              : "mt-4 flex-1 text-base leading-relaxed text-muted-foreground"
+          }
+        >
+          {project.description}
+        </p>
+
+        {project.status === "under-construction" ? (
+          <p className="mt-4 inline-flex w-fit border border-border px-2 py-1 font-mono text-[10px] uppercase tracking-wide text-muted-foreground">
+            Under Construction
           </p>
+        ) : null}
 
-          {project.status === "under-construction" ? (
-            <p className="mt-4 inline-flex w-fit border border-border px-2 py-1 font-mono text-[10px] uppercase tracking-wide text-muted-foreground">
-              Under Construction
-            </p>
-          ) : null}
-
-          {isFeatured ? null : (
-            <>
-              <div className="mt-6 flex flex-wrap gap-2">
-                {project.stack.slice(0, techCount).map((tech) => (
-                  <span
-                    key={tech}
-                    className="border border-border px-2 py-1 font-mono text-[10px] uppercase tracking-wide"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-
-              <span className="mt-8 inline-block w-fit border-b-2 border-foreground text-base font-bold transition-all group-hover:pr-2">
-                View details {"->"}
+        {isFeatured ? null : (
+          <div className="mt-6 flex flex-wrap gap-2">
+            {project.stack.slice(0, techCount).map((tech) => (
+              <span
+                key={tech}
+                className="border border-border px-2 py-1 font-mono text-[10px] uppercase tracking-wide"
+              >
+                {tech}
               </span>
-            </>
-          )}
-        </div>
-      </article>
-    </Link>
+            ))}
+          </div>
+        )}
+
+        {hasProjectLinks ? (
+          <div className="mt-6 flex flex-wrap gap-3">
+            {project.github ? (
+              <Link
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 border-2 border-border bg-primary px-3 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-primary-foreground transition-transform hover:translate-x-[2px] hover:translate-y-[2px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              >
+                <Github className="h-3.5 w-3.5" />
+                View Code
+              </Link>
+            ) : null}
+            {project.demo ? (
+              <Link
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center border-2 border-border bg-card px-3 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.14em] transition-transform hover:translate-x-[2px] hover:translate-y-[2px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              >
+                Live Demo
+              </Link>
+            ) : null}
+          </div>
+        ) : null}
+
+        <Link
+          href={projectHref}
+          className="mt-8 inline-block w-fit border-b-2 border-foreground text-base font-bold transition-all hover:pr-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        >
+          View details {"->"}
+        </Link>
+      </div>
+    </article>
   )
 }
