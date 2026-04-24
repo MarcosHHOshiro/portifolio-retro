@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#fafafa' },
+    { media: '(prefers-color-scheme: light)', color: '#f5eddc' },
     { media: '(prefers-color-scheme: dark)', color: '#0f1115' },
   ],
 }
@@ -44,7 +44,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${spaceMono.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
+      <body className={`${spaceMono.variable} ${spaceGrotesk.variable} font-mono antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

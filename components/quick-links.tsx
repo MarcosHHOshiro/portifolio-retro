@@ -11,7 +11,7 @@ export function QuickLinks() {
     <section className="px-4 py-10">
       <div className="content-shell">
         <div className="mb-6 flex items-center gap-4">
-          <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+          <span className="font-mono text-xs font-bold uppercase tracking-widest text-[var(--retro-blue)]">
             Quick Access
           </span>
           <div className="h-px flex-1 bg-border" />
@@ -22,7 +22,7 @@ export function QuickLinks() {
             <Link
               key={link.href}
               href={link.href}
-              className="group border-2 border-border bg-card p-6 transition-colors hover:bg-secondary"
+              className="group border-2 border-border bg-card p-6 shadow-[6px_6px_0_0_var(--shadow-hard)] transition-all hover:translate-x-1 hover:translate-y-1 hover:bg-secondary hover:shadow-none"
             >
               <div className="flex min-h-28 items-start justify-between gap-4">
                 <div>
@@ -34,7 +34,7 @@ export function QuickLinks() {
                   </h3>
                   <p className="mt-2 max-w-xs text-sm text-muted-foreground">{link.description}</p>
                 </div>
-                <span className="mt-1 font-mono text-2xl transition-transform group-hover:translate-x-1">
+                <span className="mt-1 font-mono text-2xl text-[var(--retro-pink)] transition-transform group-hover:translate-x-1">
                   {">"}
                 </span>
               </div>

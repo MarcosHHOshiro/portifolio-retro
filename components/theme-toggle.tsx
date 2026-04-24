@@ -13,14 +13,13 @@ export function ThemeToggle() {
   }, [])
 
   const toggleTheme = () => {
-    console.log("[v0] Current resolvedTheme:", resolvedTheme)
     setTheme(resolvedTheme === "dark" ? "light" : "dark")
   }
 
   if (!mounted) {
     return (
       <button
-        className="border-l-2 border-border px-3 py-1 font-mono text-sm transition-colors hover:bg-secondary"
+        className="border-l-2 border-border px-3 py-1 font-mono text-sm transition-colors hover:bg-[var(--retro-gold)]"
         aria-label="Toggle theme"
       >
         <div className="h-4 w-4" />
@@ -31,7 +30,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="border-l-2 border-border px-3 py-1 font-mono text-sm transition-colors hover:bg-secondary"
+      className="border-l-2 border-border px-3 py-1 font-mono text-sm transition-colors hover:bg-[var(--retro-gold)]"
       aria-label="Toggle theme"
     >
       {resolvedTheme === "dark" ? (

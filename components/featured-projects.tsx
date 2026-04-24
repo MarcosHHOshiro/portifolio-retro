@@ -11,7 +11,7 @@ export function FeaturedProjects() {
         <div className="mb-10 flex flex-col gap-6 md:mb-12">
           <div className="flex items-center justify-between gap-4">
             <div className="flex min-w-0 items-center gap-4">
-              <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-[var(--retro-blue)]">
                 Selected Work
               </span>
               <div className="h-px w-16 bg-border" />
@@ -19,14 +19,14 @@ export function FeaturedProjects() {
             </div>
             <Link
               href="/projects"
-              className="shrink-0 font-mono text-xs font-bold uppercase tracking-[0.18em] underline-offset-4 hover:underline"
+              className="shrink-0 border-2 border-border bg-[var(--retro-gold)] px-3 py-2 font-mono text-xs font-bold uppercase tracking-[0.18em] text-[var(--accent-foreground)] shadow-[4px_4px_0_0_var(--shadow-hard)] transition-transform hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
             >
               View All
             </Link>
           </div>
 
           <div className="max-w-3xl">
-            <h2 className="text-4xl font-bold tracking-[-0.05em] md:text-6xl">
+            <h2 className="text-4xl font-bold tracking-normal md:text-6xl">
               Selected projects
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
