@@ -61,6 +61,7 @@ export function Hero() {
   const folderTree = [
     { depth: 0, label: "portfolio/", type: "root" as const, expanded: true },
     { depth: 1, label: "projects/", type: "folder" as const, href: "/projects", active: true, expanded: true },
+    { depth: 2, label: "pulse-crm/", type: "folder" as const, href: "/projects/pulse-crm" },
     { depth: 2, label: "food-ordering-app/", type: "folder" as const, href: "/projects/food-ordering-app" },
     { depth: 2, label: "gym-pass-style-app-node/", type: "folder" as const, href: "/projects/gym-pass-style-app-node" },
     { depth: 2, label: "biolinks/", type: "folder" as const, href: "/projects/biolinks" },
