@@ -10,6 +10,7 @@ const projectTypeClasses = {
 } as const
 
 const projectSizes: Record<string, string> = {
+  "pulse-crm": "4.8 MB",
   "food-ordering-app": "2.4 MB",
   "gym-pass-style-app-node": "1.2 MB",
   biolinks: "3.8 MB",
