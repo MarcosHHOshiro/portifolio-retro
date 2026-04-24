@@ -24,7 +24,7 @@ export function Skills() {
     <section className="px-4 py-10">
       <div className="content-shell">
         <div className="mb-8 flex items-center gap-4">
-          <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+          <span className="font-mono text-xs font-bold uppercase tracking-widest text-[var(--retro-blue)]">
             Tech Stack
           </span>
           <div className="h-px flex-1 bg-border" />
@@ -41,7 +41,7 @@ export function Skills() {
               <ul className="space-y-2">
                 {category.skills.map((skill) => (
                   <li key={skill} className="flex items-center gap-2 font-mono text-sm">
-                    <span className="text-muted-foreground">{">"}</span>
+                    <span className="text-[var(--retro-pink)]">{">"}</span>
                     {skill}
                   </li>
                 ))}

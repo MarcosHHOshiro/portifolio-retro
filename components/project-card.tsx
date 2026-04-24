@@ -4,9 +4,9 @@ import { Github } from "lucide-react"
 import { projectTypeLabel, type Project } from "@/lib/data"
 
 const projectTypeClasses = {
-  fullstack: "bg-[#f4efc9] text-foreground dark:bg-[#3d3822] dark:text-[#ebe2bc]",
-  backend: "bg-[#dcebc9] text-foreground dark:bg-[#233325] dark:text-[#cfe0c6]",
-  frontend: "bg-secondary text-foreground dark:bg-[#202c3b] dark:text-[#d7e3f2]",
+  fullstack: "bg-[var(--retro-gold)] text-[var(--accent-foreground)]",
+  backend: "bg-[var(--retro-blue-soft)] text-[var(--retro-blue)]",
+  frontend: "bg-[var(--retro-pink-soft)] text-[var(--retro-pink)]",
 } as const
 
 const projectSizes: Record<string, string> = {
@@ -40,14 +40,14 @@ export function ProjectCard({
       className={
         isFeatured
           ? "group flex h-full flex-col border-2 border-border bg-card shadow-[8px_8px_0_0_var(--shadow-hard)] transition-all duration-200 hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
-          : "group flex h-full flex-col border-2 border-border bg-card transition-all duration-200 hover:bg-background"
+          : "group flex h-full flex-col border-2 border-border bg-card shadow-[6px_6px_0_0_var(--shadow-hard)] transition-all duration-200 hover:translate-x-1 hover:translate-y-1 hover:bg-card hover:shadow-none"
       }
     >
       <Link
         href={projectHref}
         className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
       >
-        <div className="flex items-center justify-between border-b-2 border-border bg-card px-3 py-2 font-mono text-[10px] font-bold">
+        <div className="flex items-center justify-between border-b-2 border-border bg-secondary px-3 py-2 font-mono text-[10px] font-bold">
           <span className="truncate">{`${project.slug}.exe`}</span>
           <span className="shrink-0">{projectSizes[project.slug] ?? "4.0 MB"}</span>
         </div>
@@ -73,7 +73,7 @@ export function ProjectCard({
 
       <div className={isFeatured ? "flex flex-1 flex-col p-5" : "flex flex-1 flex-col p-6"}>
         <span
-          className={`mb-4 inline-flex w-fit border-2 border-border px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-wide ${projectTypeClasses[project.type]}`}
+          className={`mb-4 inline-flex w-fit border-2 border-border px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-wide shadow-[3px_3px_0_0_var(--shadow-hard)] ${projectTypeClasses[project.type]}`}
         >
           {projectTypeLabel[project.type]}
         </span>
@@ -81,8 +81,8 @@ export function ProjectCard({
         <TitleTag
           className={
             isFeatured
-              ? "text-[2rem] leading-tight font-bold tracking-[-0.03em] text-balance"
-              : "text-2xl font-bold tracking-tight text-balance"
+              ? "text-[2rem] leading-tight font-bold tracking-normal text-balance"
+              : "text-2xl font-bold tracking-normal text-balance"
           }
         >
           <Link
@@ -129,7 +129,7 @@ export function ProjectCard({
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 border-2 border-border bg-primary px-3 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-primary-foreground transition-transform hover:translate-x-[2px] hover:translate-y-[2px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                className="inline-flex items-center justify-center gap-2 border-2 border-border bg-primary px-3 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-primary-foreground shadow-[4px_4px_0_0_var(--shadow-hard)] transition-transform hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
               >
                 <Github className="h-3.5 w-3.5" />
                 View Code
@@ -140,7 +140,7 @@ export function ProjectCard({
                 href={project.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center border-2 border-border bg-card px-3 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.14em] transition-transform hover:translate-x-[2px] hover:translate-y-[2px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                className="inline-flex items-center justify-center border-2 border-border bg-[var(--retro-gold)] px-3 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--accent-foreground)] shadow-[4px_4px_0_0_var(--shadow-hard)] transition-transform hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
               >
                 Live Demo
               </Link>

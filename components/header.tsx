@@ -16,7 +16,7 @@ export function Header() {
   const pathname = usePathname()
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b-2 border-border bg-background/90 backdrop-blur-md">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b-2 border-border bg-background/95 shadow-[0_4px_0_0_var(--shadow-hard)] backdrop-blur-md">
       <div className=" flex min-h-15 items-center justify-between gap-4 px-4 py-2">
         <div className="flex min-w-0 items-center gap-2">
           <div className="flex gap-1">
@@ -28,13 +28,13 @@ export function Header() {
             ~/dev/portfolio
           </Link>
         </div>
-        <nav className="flex items-center border-2 border-border bg-card">
+        <nav className="flex items-center border-2 border-border bg-card shadow-[4px_4px_0_0_var(--shadow-hard)]">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               className={cn(
-                "border-l-2 border-border px-4 py-2 font-mono text-sm uppercase tracking-wide transition-colors hover:bg-secondary",
+                "border-l-2 border-border px-4 py-2 font-mono text-sm font-bold uppercase tracking-wide transition-colors hover:bg-[var(--retro-gold)]",
                 pathname === link.href && "bg-primary text-primary-foreground hover:bg-primary",
                 link.href === "/" && "border-l-0"
               )}

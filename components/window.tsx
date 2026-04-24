@@ -12,8 +12,8 @@ export function Window({ title, children, className, variant = "default" }: Wind
   return (
     <div
       className={cn(
-        "relative overflow-hidden border-2 border-border bg-card shadow-[6px_6px_0_0_var(--shadow-hard)] transition-transform duration-200",
-        "before:pointer-events-none before:absolute before:inset-0 before:bg-[linear-gradient(180deg,transparent_0%,rgba(0,0,0,0.02)_100%)] before:content-[''] dark:before:bg-[linear-gradient(180deg,transparent_0%,rgba(255,255,255,0.02)_100%)]",
+        "relative overflow-hidden border-2 border-border bg-card shadow-[8px_8px_0_0_var(--shadow-hard)] transition-transform duration-200",
+        "before:pointer-events-none before:absolute before:inset-0 before:bg-[linear-gradient(180deg,rgba(255,255,255,0.34)_0%,rgba(0,0,0,0.025)_100%)] before:content-[''] dark:before:bg-[linear-gradient(180deg,rgba(255,255,255,0.035)_0%,rgba(0,0,0,0.12)_100%)]",
         variant === "outlined" && "border-dashed",
         className
       )}
@@ -21,9 +21,9 @@ export function Window({ title, children, className, variant = "default" }: Wind
       <div className="relative z-10 flex items-center justify-between border-b-2 border-border bg-secondary px-3 py-2">
         <div className="flex items-center gap-2">
           <div className="flex gap-1">
-            <span className="h-2.5 w-2.5 border border-foreground bg-foreground" />
-            <span className="h-2.5 w-2.5 border border-foreground bg-background" />
-            <span className="h-2.5 w-2.5 border border-foreground bg-background" />
+            <span className="h-2.5 w-2.5 border border-foreground bg-[var(--retro-pink)]" />
+            <span className="h-2.5 w-2.5 border border-foreground bg-[var(--retro-gold)]" />
+            <span className="h-2.5 w-2.5 border border-foreground bg-[var(--retro-green)]" />
           </div>
           <span className="font-mono text-xs font-bold uppercase tracking-wide">{title}</span>
         </div>
