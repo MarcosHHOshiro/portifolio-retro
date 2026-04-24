@@ -28,64 +28,6 @@ export const projectTypeLabel: Record<ProjectType, string> = {
 
 export const projects: Project[] = [
   {
-    slug: "pulse-crm",
-    title: "Pulse CRM",
-    description:
-      "A multi-tenant SaaS CRM MVP built with Next.js, NestJS, PostgreSQL, Prisma, Docker, and Turborepo.",
-    longDescription:
-      "Pulse CRM is a fullstack SaaS CRM portfolio project designed around realistic product and backend architecture. It includes authenticated workspaces, organization-based tenant isolation, role-aware user management, leads, clients, opportunities, activities, dashboard metrics, and an additional feedback module. The project uses a Turborepo monorepo with a Next.js App Router frontend and a NestJS modular monolith API backed by PostgreSQL and Prisma.",
-    problem:
-      "Sales teams need a secure CRM workspace where users can manage leads, clients, opportunities, activities, and team access without exposing data across organizations.",
-    solution:
-      "The application implements organization-scoped data ownership across the backend, JWT authentication with refresh tokens, role-based authorization, validated DTOs, and focused frontend feature modules for core CRM workflows.",
-    architecture:
-      "Turborepo monorepo with apps/web for the Next.js frontend, apps/api for the NestJS API, and packages/types for shared enums and lightweight types. The backend follows a modular monolith structure with thin controllers, service/use-case layers, Prisma persistence, DTO validation, global validation pipes, and centralized exception handling. The frontend uses feature-based organization with App Router routes, TanStack Query for server state, Zod form validation, centralized API clients, and shared UI components. Production deployment is containerized with Docker Compose, PostgreSQL, and reverse proxy support for both Caddy and existing Nginx VPS setups.",
-    solutionHighlights: [
-      "Multi-tenant data model with organizationId indexes across business entities",
-      "JWT access token and refresh token flow with HttpOnly cookies",
-      "Role-aware access model with OWNER, MANAGER, and SALES_REP roles",
-      "CRM modules for leads, clients, opportunities, activities, users, organizations, dashboard, and feedback",
-      "Lead conversion flow that creates clients and marks leads as converted",
-      "Opportunity pipeline with stage updates that derive won/lost status",
-      "Prisma schema with UUID primary keys, explicit relations, timestamps, and useful indexes",
-      "Backend tests covering authentication, tenant isolation, lead conversion, and opportunity stage behavior",
-      "Production Docker setup with Postgres health checks, Prisma migration deployment, and Nginx/Caddy reverse proxy options",
-    ],
-    validationCommand: "npm run check-types && npm run lint && npm run build && npm run test:api",
-    validationChecks: [
-      "TypeScript checks across the Turborepo workspaces",
-      "ESLint checks for the web and API apps",
-      "Next.js production build",
-      "NestJS production build",
-      "Prisma client generation and migration deployment scripts",
-      "API integration tests for auth critical flows",
-      "API integration test for tenant isolation",
-      "API integration test for lead conversion",
-      "API integration tests for opportunity stage updates",
-    ],
-    stack: [
-      "Next.js App Router",
-      "React",
-      "NestJS",
-      "TypeScript",
-      "PostgreSQL",
-      "Prisma",
-      "Docker",
-      "Turborepo",
-      "Tailwind CSS",
-      "TanStack Query",
-      "Zod",
-      "JWT",
-      "Vitest",
-      "Supertest",
-    ],
-    type: "fullstack",
-    category: "CRM / B2B SaaS",
-    image: "/CRM.png",
-    github: "https://github.com/MarcosHHOshiro/CRM-SAAS",
-    demo: "https://crm.marcos-hh-oshiro.com/",
-  },
-  {
     slug: "food-ordering-app",
     title: "Food Ordering App",
     description: "Full-stack food ordering platform where customers search restaurants by city and cuisine, place orders, and track order status; restaurant owners manage menus and incoming orders.",
