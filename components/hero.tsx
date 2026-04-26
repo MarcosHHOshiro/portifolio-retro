@@ -125,20 +125,30 @@ export function Hero() {
                 </p>
 
                 <div className="flex flex-wrap gap-4 pt-0.5">
-                  <Link
-                    href="/projects"
-                    className="border-2 border-border bg-primary px-10 py-4 font-mono text-lg font-bold uppercase tracking-[0.12em] text-primary-foreground transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none md:text-base"
-                    style={{ boxShadow: "6px 6px 0 0 var(--shadow-hard)" }}
-                  >
-                    View Projects
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="border-2 border-border bg-[var(--retro-pink)] px-10 py-4 font-mono text-lg font-bold uppercase tracking-[0.12em] text-white transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none md:text-base"
-                    style={{ boxShadow: "6px 6px 0 0 var(--shadow-hard)" }}
-                  >
-                    Contact Me
-                  </Link>
+                  <span className="group relative inline-flex">
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-0 translate-x-[6px] translate-y-[6px] bg-[var(--shadow-hard)]"
+                    />
+                    <Link
+                      href="/projects"
+                      className="relative z-10 inline-flex items-center justify-center border-2 border-border bg-primary px-10 py-4 font-mono text-lg font-bold uppercase tracking-[0.12em] text-primary-foreground transition-transform group-hover:translate-x-[6px] group-hover:translate-y-[6px] md:text-base"
+                    >
+                      View Projects
+                    </Link>
+                  </span>
+                  <span className="group relative inline-flex">
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-0 translate-x-[6px] translate-y-[6px] bg-[var(--shadow-hard)]"
+                    />
+                    <Link
+                      href="/contact"
+                      className="relative z-10 inline-flex items-center justify-center border-2 border-border bg-[var(--retro-pink)] px-10 py-4 font-mono text-lg font-bold uppercase tracking-[0.12em] text-white transition-transform group-hover:translate-x-[6px] group-hover:translate-y-[6px] md:text-base"
+                    >
+                      Contact Me
+                    </Link>
+                  </span>
                 </div>
               </div>
             </div>

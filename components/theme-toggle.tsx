@@ -1,10 +1,15 @@
 "use client"
 
+import { cn } from "@/lib/utils"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
 
-export function ThemeToggle() {
+type ThemeToggleProps = {
+  className?: string
+}
+
+export function ThemeToggle({ className }: ThemeToggleProps) {
   const { resolvedTheme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
@@ -19,7 +24,10 @@ export function ThemeToggle() {
   if (!mounted) {
     return (
       <button
-        className="border-l-2 border-border px-3 py-1 font-mono text-sm transition-colors hover:bg-[var(--retro-gold)]"
+        className={cn(
+          "shrink-0 border-l-2 border-border px-2 py-1 font-mono text-sm transition-colors hover:bg-[var(--retro-gold)] sm:px-3",
+          className
+        )}
         aria-label="Toggle theme"
       >
         <div className="h-4 w-4" />
@@ -30,7 +38,10 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="border-l-2 border-border px-3 py-1 font-mono text-sm transition-colors hover:bg-[var(--retro-gold)]"
+      className={cn(
+        "shrink-0 border-l-2 border-border px-2 py-1 font-mono text-sm transition-colors hover:bg-[var(--retro-gold)] sm:px-3",
+        className
+      )}
       aria-label="Toggle theme"
     >
       {resolvedTheme === "dark" ? (
